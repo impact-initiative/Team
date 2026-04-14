@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Priyanka Singh Research Group - Multimodal Misinformation Detection Lab</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+    background: #f8fafb;
+    color: #1a202c;
+    line-height: 1.6;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  /* Header */
+  header {
+    background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%);
+    border-bottom: 2px solid #e8f0f8;
+    padding: 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0, 51, 102, 0.08);
+  }
+  
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    font-size: 18px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #0066cc 0%, #003d99 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: #1a202c;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+  
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #0066cc, #003d99);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+  
+  /* Hero Section */
+  .hero {
+    padding: 100px 0 80px;
+    background: linear-gradient(135deg, #0066cc 0%, #003d99 50%, #1a0066 100%);
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .hero h1 {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+  }
+  
+  .hero .subtitle {
+    font-size: 20px;
+    color: rgba(255,255,255,0.95);
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+  
+  .hero .tagline {
+    font-size: 16px;
+    color: rgba(255,255,255,0.85);
+    max-width: 650px;
+    line-height: 1.8;
+  }
+  
+  /* Sections */
+  section {
+    padding: 80px 0;
+    border-bottom: 1px solid #e8f0f8;
+    animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  section h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 48px;
+    color: #003d99;
+    position: relative;
+    padding-bottom: 16px;
+  }
+  
+  section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #0066cc, #003d99);
+    border-radius: 2px;
+  }
+  
+  /* About Section with Photo */
+  .about-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  
+  .about-text p {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 24px;
+    color: #2d3748;
+  }
+  
+  .photo-container {
+    position: relative;
+    animation: slideInRight 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .photo-placeholder {
+    width: 280px;
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #e0e7ff 0%, #f0e7ff 100%);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #6b7280;
+    border: 2px dashed #cbd5e1;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 51, 102, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin: 0 auto;
+  }
+  
+  .photo-placeholder:hover {
+    box-shadow: 0 30px 60px rgba(0, 51, 102, 0.15);
+    transform: translateY(-4px);
+  }
+  
+  .photo-placeholder svg {
+    width: 120px;
+    height: 120px;
+    opacity: 0.4;
+  }
+  
+  /* Research Cards */
+  .research-areas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 28px;
+    margin-bottom: 32px;
+  }
+  
+  .research-card {
+    background: white;
+    padding: 32px;
+    border-radius: 12px;
+    border-left: 4px solid #0066cc;
+    box-shadow: 0 4px 12px rgba(0, 51, 102, 0.08);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .research-card:hover {
+    box-shadow: 0 12px 24px rgba(0, 51, 102, 0.15);
+    transform: translateY(-4px);
+    border-left-color: #003d99;
+  }
+  
+  .research-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #003d99;
+  }
+  
+  .research-card p {
+    font-size: 14px;
+    color: #4a5568;
+    line-height: 1.7;
+  }
+  
+  /* Publications */
+  .publications-summary {
+    background: linear-gradient(135deg, #f0f7ff 0%, #e8f0ff 100%);
+    padding: 40px;
+    border-radius: 12px;
+    border-left: 4px solid #0066cc;
+    margin-bottom: 32px;
+  }
+  
+  .pub-stats {
+    display: flex;
+    gap: 60px;
+    margin-bottom: 24px;
+  }
+  
+  .pub-stat {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .pub-stat .number {
+    font-size: 40px;
+    font-weight: 700;
+    color: #0066cc;
+  }
+  
+  .pub-stat .label {
+    font-size: 13px;
+    color: #4a5568;
+    font-weight: 500;
+    margin-top: 4px;
+  }
+  
+  /* Workshops */
+  .workshop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 28px;
+  }
+  
+  .workshop-card {
+    background: white;
+    padding: 32px;
+    border-radius: 12px;
+    border-top: 4px solid #0066cc;
+    box-shadow: 0 4px 12px rgba(0, 51, 102, 0.08);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .workshop-card:hover {
+    box-shadow: 0 12px 24px rgba(0, 51, 102, 0.15);
+    transform: translateY(-4px);
+    border-top-color: #003d99;
+  }
+  
+  .workshop-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #003d99;
+  }
+  
+  .workshop-date {
+    font-size: 13px;
+    color: #0066cc;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  
+  .workshop-desc {
+    font-size: 14px;
+    color: #4a5568;
+    line-height: 1.7;
+  }
+  
+  .workshop-link {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 13px;
+    text-decoration: none;
+    color: #0066cc;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .workshop-link:hover {
+    color: #003d99;
+    transform: translateX(4px);
+  }
+  
+  /* Team Section */
+  .team-section {
+    background: linear-gradient(135deg, #f0f7ff 0%, #e8f0ff 100%);
+    padding: 32px;
+    border-radius: 12px;
+    border-left: 4px solid #0066cc;
+    margin-bottom: 24px;
+  }
+  
+  .team-section h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #003d99;
+  }
+  
+  .team-section p {
+    font-size: 14px;
+    color: #4a5568;
+    line-height: 1.8;
+  }
+  
+  /* Contact */
+  .contact-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 28px;
+    margin-bottom: 32px;
+  }
+  
+  .contact-card {
+    background: white;
+    padding: 28px;
+    border-radius: 12px;
+    border: 1px solid #e8f0f8;
+    box-shadow: 0 2px 8px rgba(0, 51, 102, 0.06);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .contact-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 51, 102, 0.12);
+    transform: translateY(-2px);
+  }
+  
+  .contact-card h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #003d99;
+  }
+  
+  .contact-card p {
+    font-size: 14px;
+    color: #4a5568;
+    line-height: 1.7;
+  }
+  
+  .contact-card a {
+    color: #0066cc;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  
+  .contact-card a:hover {
+    color: #003d99;
+  }
+  
+  .collaboration-box {
+    background: linear-gradient(135deg, #e0e7ff 0%, #dde8ff 100%);
+    border: 2px solid #0066cc;
+    padding: 32px;
+    border-radius: 12px;
+    text-align: center;
+    margin-top: 32px;
+  }
+  
+  .collaboration-box p {
+    font-size: 14px;
+    color: #2d3748;
+    line-height: 1.8;
+  }
+  
+  /* Footer */
+  footer {
+    background: linear-gradient(135deg, #003d99 0%, #001a4d 100%);
+    color: rgba(255,255,255,0.9);
+    padding: 40px 0;
+    text-align: center;
+    border-top: 2px solid #0066cc;
+  }
+  
+  footer p {
+    margin-bottom: 8px;
+    font-size: 13px;
+  }
+  
+  footer a {
+    color: rgba(255,255,255,0.95);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  
+  footer a:hover {
+    color: #fff;
+  }
+  
+  /* Badges */
+  .badge {
+    display: inline-block;
+    background: #e8f0f8;
+    color: #003d99;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    margin: 4px 6px 4px 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .badge:hover {
+    background: #d4e4f7;
+    transform: translateY(-2px);
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .nav-links {
+      gap: 15px;
+      font-size: 12px;
+    }
+    
+    .hero h1 {
+      font-size: 32px;
+    }
+    
+    .about-container {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    
+    .pub-stats {
+      gap: 30px;
+    }
+    
+    .pub-stat .number {
+      font-size: 32px;
+    }
+    
+    section h2 {
+      font-size: 28px;
+      margin-bottom: 32px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <div class="logo">🔬 Priyanka Singh Research Group</div>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#workshops">Workshops</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1>Multimodal Misinformation & Deepfake Detection</h1>
+      <p class="subtitle">School of Electrical Engineering and Computer Science, University of Queensland</p>
+      <p class="tagline">Advancing AI-driven detection and forensic analysis of manipulated media through multimodal learning, privacy-preserving techniques, and explainable frameworks for real-world impact.</p>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <h2>About the Group</h2>
+    <div class="about-container">
+      <div class="about-text">
+        <p>
+          Led by Dr. Priyanka Singh, a Senior Lecturer in Cyber Security, our research group focuses on tackling the critical challenges posed by deepfakes, synthetic media, and multimodal misinformation. With a PhD in Image Forensics and postdoctoral experience at prestigious institutions (SUNY Albany, Dartmouth College), Dr. Singh brings expertise in digital forensics, cybersecurity, privacy-preserving techniques, and AI-driven content authentication.
+        </p>
+        <p>
+          We work at the intersection of computer vision, multimedia forensics, and AI security, developing robust detection frameworks and evaluation benchmarks that serve high-stakes applications in elections, healthcare, law enforcement, and platform integrity.
+        </p>
+        <p style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #e8f0f8; color: #4a5568; font-size: 13px;">
+          <strong>Collaborations:</strong> We actively collaborate with government agencies, media integrity organizations, industry partners, and international research communities to advance the state-of-the-art in misinformation detection.
+        </p>
+      </div>
+      <div class="photo-container">
+        <div class="photo-placeholder">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="100" cy="70" r="35" fill="currentColor" opacity="0.3"/>
+            <path d="M 50 140 Q 50 120 100 120 Q 150 120 150 140 L 150 180 Q 150 190 140 190 L 60 190 Q 50 190 50 180 Z" fill="currentColor" opacity="0.3"/>
+          </svg>
+          <div style="text-align: center; margin-top: 20px;">
+            <p>Dr. Priyanka Singh</p>
+            <p style="font-size: 12px; margin-top: 4px;">Photo placeholder</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="research">
+  <div class="container">
+    <h2>Research Areas</h2>
+    <div class="research-areas">
+      <div class="research-card">
+        <h3>🖼️ Multimodal Misinformation</h3>
+        <p>Detection and analysis of falsified or staged visual content combined with misleading captions, addressing narrative-level inconsistencies beyond pixel-level artifacts.</p>
+      </div>
+      <div class="research-card">
+        <h3>🎭 Deepfake Detection & Attribution</h3>
+        <p>Audio, visual, and video forensic techniques to identify synthetic media generation methods and trace manipulation origins with explainability for non-expert users.</p>
+      </div>
+      <div class="research-card">
+        <h3>🔐 Privacy-Preserving Forensics</h3>
+        <p>Secure approaches using homomorphic encryption and secret sharing for authentication and tampering detection without exposing sensitive data.</p>
+      </div>
+      <div class="research-card">
+        <h3>⚔️ AI Safety & Adversarial Robustness</h3>
+        <p>Mitigation of AI-based attacks including adversarial perturbations, jailbreak prompts, and coordinated abuse in vision-language systems.</p>
+      </div>
+      <div class="research-card">
+        <h3>💡 Explainable AI for Media Verification</h3>
+        <p>Interactive and human-interpretable frameworks enabling non-expert users to understand deepfake detection decisions and verify content authenticity.</p>
+      </div>
+      <div class="research-card">
+        <h3>🛡️ Cyber Threat Intelligence Sharing</h3>
+        <p>Secure and collaborative approaches to CTI data exchange with robust privacy protection for AI-driven cybersecurity incident response.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="publications">
+  <div class="container">
+    <h2>Publications & Impact</h2>
+    <div class="publications-summary">
+      <div class="pub-stats">
+        <div class="pub-stat">
+          <div class="number">74</div>
+          <div class="label">Total publications</div>
+        </div>
+        <div class="pub-stat">
+          <div class="number">24</div>
+          <div class="label">Journal articles</div>
+        </div>
+        <div class="pub-stat">
+          <div class="number">50</div>
+          <div class="label">Conference papers</div>
+        </div>
+      </div>
+      <p style="font-size: 14px; color: #2d3748; line-height: 1.8;">
+        available on <a href="https://scholar.google.com/citations?user=n1pfC-0AAAAJ&hl=en" class="workshop-link">→ Google Scholar</a>
+      </p>
+    </div>
+    <div style="background: white; padding: 24px; border-radius: 12px; border: 1px solid #e8f0f8;">
+      <p style="font-size: 13px; color: #4a5568; margin-bottom: 12px;"><strong style="color: #003d99;">Keywords:</strong></p>
+      <div>
+        <span class="badge">Deepfake detection</span>
+        <span class="badge">Multimodal forensics</span>
+        <span class="badge">Privacy preservation</span>
+        <span class="badge">Homomorphic encryption</span>
+        <span class="badge">Misinformation detection</span>
+        <span class="badge">Audio deepfakes</span>
+        <span class="badge">AI safety</span>
+        <span class="badge">Explainable AI</span>
+        <span class="badge">Digital forensics</span>
+        <span class="badge">Media authentication</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="workshops">
+  <div class="container">
+    <h2>Workshops & Community</h2>
+    <div class="workshop-grid">
+      <div class="workshop-card">
+        <h3>PP-MisDet @ CVPR 2026</h3>
+        <p class="workshop-date">📅 June 3–4, 2026 • Denver, USA</p>
+        <p class="workshop-desc"><strong>From Perception to Persuasion: Challenges and Advances in Misinformation Detection in Society.</strong> Co-organized workshop bringing together computer vision, multimedia forensics, policy, and platform integrity experts.</p>
+        <p class="workshop-desc" style="margin-top: 12px; font-size: 13px;">Featured challenge: <strong>DGM4+ benchmark</strong> on contextual manipulation detection with textual grounding and multi-task learning.</p>
+        <a href="https://eecs.uq.edu.au/CVPR2026" class="workshop-link">→ Visit workshop site</a>
+      </div>
+      <div class="workshop-card">
+        <h3>IMPACT @ ACM Multimedia 2026</h3>
+        <p class="workshop-date">📅 November 10–14, 2026 • Rio de Janeiro, Brazil</p>
+        <p class="workshop-desc"><strong>IMPACT: International Multimedia Perception and Content Technology.</strong> Advancing techniques for multimodal media analysis, authenticity verification, and harm mitigation in digital ecosystems.</p>
+        <p class="workshop-desc" style="margin-top: 12px; font-size: 13px;"><strong>Focus Areas:</strong> Multimodal forensics, deepfake detection, explainability, and real-world platform applications.</p>
+        <a href="https://impact-initiative.github.io/" class="workshop-link">→ Workshop site</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="team">
+  <div class="container">
+    <h2>Team & Mentoring</h2>
+    <div class="team-section">
+      <h3>👩‍🔬 Leadership</h3>
+      <p><strong>Dr. Priyanka Singh</strong><br>Senior Lecturer, UQ Cyber Research Centre<br>School of Electrical Engineering and Computer Science</p>
+      <p style="margin-top: 16px;">Available for supervision of PhD and Masters research projects. Active areas: split learning robustness, privacy-aware deepfake detection, LLM security, multimodal fusion, autonomous cyber defence.</p>
+    </div>
+    <div class="team-section">
+      <h3>👥 Research Team</h3>
+      <p>The group includes PhD candidates, Masters students, and research collaborators focused on multimodal detection frameworks, forensic analysis pipelines, and real-world mitigation strategies. We regularly mentor undergraduate researchers and visiting scholars from international institutions.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <h2>Contact & Collaboration</h2>
+    <div class="contact-info">
+      <div class="contact-card">
+        <h3>📧 Email</h3>
+        <p><a href="/cdn-cgi/l/email-protection#3747455e4e56595c5619445e59505f77424619525342195642"><span class="__cf_email__" data-cfemail="1b6b6972627a75707a356872757c735b6e6a357e7f6e357a6e">[email&#160;protected]</span></a></p>
+      </div>
+      <div class="contact-card">
+        <h3>🏫 Affiliation</h3>
+        <p>University of Queensland<br>School of EECS<br>Brisbane, Australia</p>
+      </div>
+      <div class="contact-card">
+        <h3>🔗 Research Profiles</h3>
+        <p><a href="https://about.uq.edu.au/experts/41970">UQ Experts</a><br><a href="https://www.cyber.uq.edu.au/profile/1382/priyanka-singh">UQ Cyber Centre</a><br><a href="https://orcid.org/0000-0001-5002-8800">ORCID</a></p>
+      </div>
+    </div>
+    <div class="collaboration-box">
+      <p><strong style="font-size: 15px;">Interested in collaboration, internships, or research partnerships?</strong><br>We welcome inquiries from industry, government, and academic institutions.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p style="margin-bottom: 12px; font-size: 14px;">Priyanka Singh Research Group • University of Queensland School of EECS</p>
+    <p style="font-size: 12px; opacity: 0.9;">© 2026. For supervision opportunities an
