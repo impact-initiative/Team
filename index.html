@@ -3,27 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Priyanka Singh Research Group - Multimodal Misinformation Detection Lab</title>
+<title>Priyanka Singh Research Group - AI-enabled Cyber Forensics Lab</title>
 <style>
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
-  
+
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
     background: #f8fafb;
     color: #1a202c;
     line-height: 1.6;
   }
-  
+
   .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
   }
-  
+
   /* Header */
   header {
     background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%);
@@ -34,13 +34,13 @@
     z-index: 100;
     box-shadow: 0 2px 8px rgba(0, 51, 102, 0.08);
   }
-  
+
   nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  
+
   .logo {
     font-size: 18px;
     font-weight: 600;
@@ -49,13 +49,13 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  
+
   .nav-links {
     display: flex;
     gap: 28px;
     list-style: none;
   }
-  
+
   .nav-links a {
     text-decoration: none;
     color: #1a202c;
@@ -64,7 +64,7 @@
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
   }
-  
+
   .nav-links a::after {
     content: '';
     position: absolute;
@@ -75,11 +75,11 @@
     background: linear-gradient(90deg, #0066cc, #003d99);
     transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  
+
   .nav-links a:hover::after {
     width: 100%;
   }
-  
+
   /* Hero Section */
   .hero {
     padding: 100px 0 80px;
@@ -88,7 +88,7 @@
     position: relative;
     overflow: hidden;
   }
-  
+
   .hero::before {
     content: '';
     position: absolute;
@@ -99,13 +99,13 @@
     background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
     border-radius: 50%;
   }
-  
+
   .hero-content {
     position: relative;
     z-index: 2;
     animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  
+
   .hero h1 {
     font-size: 48px;
     font-weight: 700;
@@ -113,28 +113,28 @@
     line-height: 1.2;
     letter-spacing: -0.5px;
   }
-  
+
   .hero .subtitle {
     font-size: 20px;
     color: rgba(255,255,255,0.95);
     margin-bottom: 24px;
     font-weight: 500;
   }
-  
+
   .hero .tagline {
     font-size: 16px;
     color: rgba(255,255,255,0.85);
     max-width: 650px;
     line-height: 1.8;
   }
-  
+
   /* Sections */
   section {
     padding: 80px 0;
     border-bottom: 1px solid #e8f0f8;
     animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  
+
   section h2 {
     font-size: 36px;
     font-weight: 700;
@@ -143,7 +143,7 @@
     position: relative;
     padding-bottom: 16px;
   }
-  
+
   section h2::after {
     content: '';
     position: absolute;
@@ -154,7 +154,7 @@
     background: linear-gradient(90deg, #0066cc, #003d99);
     border-radius: 2px;
   }
-  
+
   /* About Section with Photo */
   .about-container {
     display: grid;
@@ -162,19 +162,19 @@
     gap: 60px;
     align-items: start;
   }
-  
+
   .about-text p {
     font-size: 16px;
     line-height: 1.8;
     margin-bottom: 24px;
     color: #2d3748;
   }
-  
+
   .photo-container {
     position: relative;
     animation: slideInRight 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  
+
   .photo-placeholder {
     width: 280px;
     aspect-ratio: 1;
@@ -191,18 +191,19 @@
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     margin: 0 auto;
   }
-  
+
   .photo-placeholder:hover {
     box-shadow: 0 30px 60px rgba(0, 51, 102, 0.15);
     transform: translateY(-4px);
   }
-  
-  .photo-placeholder svg {
-    width: 120px;
-    height: 120px;
-    opacity: 0.4;
+
+  .photo-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
-  
+
   /* Research Cards */
   .research-areas {
     display: grid;
@@ -210,7 +211,7 @@
     gap: 28px;
     margin-bottom: 32px;
   }
-  
+
   .research-card {
     background: white;
     padding: 32px;
@@ -219,26 +220,26 @@
     box-shadow: 0 4px 12px rgba(0, 51, 102, 0.08);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  
+
   .research-card:hover {
     box-shadow: 0 12px 24px rgba(0, 51, 102, 0.15);
     transform: translateY(-4px);
     border-left-color: #003d99;
   }
-  
+
   .research-card h3 {
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 12px;
     color: #003d99;
   }
-  
+
   .research-card p {
     font-size: 14px;
     color: #4a5568;
     line-height: 1.7;
   }
-  
+
   /* Publications */
   .publications-summary {
     background: linear-gradient(135deg, #f0f7ff 0%, #e8f0ff 100%);
@@ -247,38 +248,38 @@
     border-left: 4px solid #0066cc;
     margin-bottom: 32px;
   }
-  
+
   .pub-stats {
     display: flex;
     gap: 60px;
     margin-bottom: 24px;
   }
-  
+
   .pub-stat {
     display: flex;
     flex-direction: column;
   }
-  
+
   .pub-stat .number {
     font-size: 40px;
     font-weight: 700;
     color: #0066cc;
   }
-  
+
   .pub-stat .label {
     font-size: 13px;
     color: #4a5568;
     font-weight: 500;
     margin-top: 4px;
   }
-  
+
   /* Workshops */
   .workshop-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
     gap: 28px;
   }
-  
+
   .workshop-card {
     background: white;
     padding: 32px;
@@ -287,33 +288,33 @@
     box-shadow: 0 4px 12px rgba(0, 51, 102, 0.08);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  
+
   .workshop-card:hover {
     box-shadow: 0 12px 24px rgba(0, 51, 102, 0.15);
     transform: translateY(-4px);
     border-top-color: #003d99;
   }
-  
+
   .workshop-card h3 {
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 8px;
     color: #003d99;
   }
-  
+
   .workshop-date {
     font-size: 13px;
     color: #0066cc;
     font-weight: 500;
     margin-bottom: 12px;
   }
-  
+
   .workshop-desc {
     font-size: 14px;
     color: #4a5568;
     line-height: 1.7;
   }
-  
+
   .workshop-link {
     display: inline-block;
     margin-top: 16px;
@@ -323,12 +324,12 @@
     font-weight: 600;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  
+
   .workshop-link:hover {
     color: #003d99;
     transform: translateX(4px);
   }
-  
+
   /* Team Section */
   .team-section {
     background: linear-gradient(135deg, #f0f7ff 0%, #e8f0ff 100%);
@@ -337,20 +338,33 @@
     border-left: 4px solid #0066cc;
     margin-bottom: 24px;
   }
-  
+
   .team-section h3 {
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 16px;
     color: #003d99;
   }
-  
+
   .team-section p {
     font-size: 14px;
     color: #4a5568;
     line-height: 1.8;
   }
-  
+
+  .student-members {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px 24px;
+    margin-top: 8px;
+  }
+
+  .student-members div {
+    font-size: 14px;
+    color: #4a5568;
+    line-height: 1.8;
+  }
+
   /* Contact */
   .contact-info {
     display: grid;
@@ -358,7 +372,7 @@
     gap: 28px;
     margin-bottom: 32px;
   }
-  
+
   .contact-card {
     background: white;
     padding: 28px;
@@ -367,36 +381,36 @@
     box-shadow: 0 2px 8px rgba(0, 51, 102, 0.06);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  
+
   .contact-card:hover {
     box-shadow: 0 8px 16px rgba(0, 51, 102, 0.12);
     transform: translateY(-2px);
   }
-  
+
   .contact-card h3 {
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 8px;
     color: #003d99;
   }
-  
+
   .contact-card p {
     font-size: 14px;
     color: #4a5568;
     line-height: 1.7;
   }
-  
+
   .contact-card a {
     color: #0066cc;
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s;
   }
-  
+
   .contact-card a:hover {
     color: #003d99;
   }
-  
+
   .collaboration-box {
     background: linear-gradient(135deg, #e0e7ff 0%, #dde8ff 100%);
     border: 2px solid #0066cc;
@@ -405,13 +419,13 @@
     text-align: center;
     margin-top: 32px;
   }
-  
+
   .collaboration-box p {
     font-size: 14px;
     color: #2d3748;
     line-height: 1.8;
   }
-  
+
   /* Footer */
   footer {
     background: linear-gradient(135deg, #003d99 0%, #001a4d 100%);
@@ -420,23 +434,23 @@
     text-align: center;
     border-top: 2px solid #0066cc;
   }
-  
+
   footer p {
     margin-bottom: 8px;
     font-size: 13px;
   }
-  
+
   footer a {
     color: rgba(255,255,255,0.95);
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s;
   }
-  
+
   footer a:hover {
     color: #fff;
   }
-  
+
   /* Badges */
   .badge {
     display: inline-block;
@@ -449,12 +463,12 @@
     margin: 4px 6px 4px 0;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  
+
   .badge:hover {
     background: #d4e4f7;
     transform: translateY(-2px);
   }
-  
+
   /* Animations */
   @keyframes fadeIn {
     from {
@@ -464,7 +478,7 @@
       opacity: 1;
     }
   }
-  
+
   @keyframes fadeInUp {
     from {
       opacity: 0;
@@ -475,7 +489,7 @@
       transform: translateY(0);
     }
   }
-  
+
   @keyframes slideInRight {
     from {
       opacity: 0;
@@ -486,31 +500,31 @@
       transform: translateX(0);
     }
   }
-  
+
   /* Responsive */
   @media (max-width: 768px) {
     .nav-links {
       gap: 15px;
       font-size: 12px;
     }
-    
+
     .hero h1 {
       font-size: 32px;
     }
-    
+
     .about-container {
       grid-template-columns: 1fr;
       gap: 40px;
     }
-    
+
     .pub-stats {
       gap: 30px;
     }
-    
+
     .pub-stat .number {
       font-size: 32px;
     }
-    
+
     section h2 {
       font-size: 28px;
       margin-bottom: 32px;
@@ -523,11 +537,12 @@
 <header>
   <div class="container">
     <nav>
-      <div class="logo">🔬 Priyanka Singh Research Group</div>
+      <div class="logo">🔬 AI-enabled Cyber Forensics Lab</div>
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#research">Research</a></li>
         <li><a href="#publications">Publications</a></li>
+        <li><a href="#news">News</a></li>
         <li><a href="#workshops">Workshops</a></li>
         <li><a href="#team">Team</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -539,7 +554,7 @@
 <section class="hero">
   <div class="container">
     <div class="hero-content">
-      <h1>Multimodal Misinformation & Deepfake Detection</h1>
+      <h1>AI-enabled Cyber Forensics Lab</h1>
       <p class="subtitle">School of Electrical Engineering and Computer Science, University of Queensland</p>
       <p class="tagline">Advancing AI-driven detection and forensic analysis of manipulated media through multimodal learning, privacy-preserving techniques, and explainable frameworks for real-world impact.</p>
     </div>
@@ -563,14 +578,7 @@
       </div>
       <div class="photo-container">
         <div class="photo-placeholder">
-          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="100" cy="70" r="35" fill="currentColor" opacity="0.3"/>
-            <path d="M 50 140 Q 50 120 100 120 Q 150 120 150 140 L 150 180 Q 150 190 140 190 L 60 190 Q 50 190 50 180 Z" fill="currentColor" opacity="0.3"/>
-          </svg>
-          <div style="text-align: center; margin-top: 20px;">
-            <p>Dr. Priyanka Singh</p>
-            <p style="font-size: 12px; margin-top: 4px;">Photo placeholder</p>
-          </div>
+          <img src="priyanka-singh.png" alt="Dr. Priyanka Singh">
         </div>
       </div>
     </div>
@@ -649,6 +657,15 @@
   </div>
 </section>
 
+<section id="news">
+  <div class="container">
+    <h2>Recent Achievements & News</h2>
+    <div class="team-section">
+      <p>Stay tuned for updates on our recent achievements, publications, workshops, student milestones, and group news.</p>
+    </div>
+  </div>
+</section>
+
 <section id="workshops">
   <div class="container">
     <h2>Workshops & Community</h2>
@@ -680,8 +697,17 @@
       <p style="margin-top: 16px;">Available for supervision of PhD and Masters research projects. Active areas: split learning robustness, privacy-aware deepfake detection, LLM security, multimodal fusion, autonomous cyber defence.</p>
     </div>
     <div class="team-section">
-      <h3>👥 Research Team</h3>
-      <p>The group includes PhD candidates, Masters students, and research collaborators focused on multimodal detection frameworks, forensic analysis pipelines, and real-world mitigation strategies. We regularly mentor undergraduate researchers and visiting scholars from international institutions.</p>
+      <h3>👥 Student Team</h3>
+      <div class="student-members">
+        <div>Gagandeep Singh</div>
+        <div>Samudi Amarasinghe</div>
+        <div>Urawee Thani</div>
+        <div>Ki Fung Wong</div>
+        <div>Xunyu Lai</div>
+        <div>Wilson Nguyen</div>
+        <div>Jingkai Guo</div>
+        <div>Lukas Zhang</div>
+      </div>
     </div>
   </div>
 </section>
@@ -692,7 +718,7 @@
     <div class="contact-info">
       <div class="contact-card">
         <h3>📧 Email</h3>
-        <p><a href="/cdn-cgi/l/email-protection#3747455e4e56595c5619445e59505f77424619525342195642"><span class="__cf_email__" data-cfemail="1b6b6972627a75707a356872757c735b6e6a357e7f6e357a6e">[email&#160;protected]</span></a></p>
+        <p><a href="mailto:priyanka.singh@uq.edu.au">priyanka.singh@uq.edu.au</a></p>
       </div>
       <div class="contact-card">
         <h3>🏫 Affiliation</h3>
@@ -711,5 +737,10 @@
 
 <footer>
   <div class="container">
-    <p style="margin-bottom: 12px; font-size: 14px;">Priyanka Singh Research Group • University of Queensland School of EECS</p>
-    <p style="font-size: 12px; opacity: 0.9;">© 2026. For supervision opportunities an
+    <p style="margin-bottom: 12px; font-size: 14px;">AI-enabled Cyber Forensics Lab • University of Queensland School of EECS</p>
+    <p style="font-size: 12px; opacity: 0.9;">© 2026. For supervision opportunities and collaboration inquiries, please get in touch.</p>
+  </div>
+</footer>
+
+</body>
+</html>
