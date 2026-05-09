@@ -130,13 +130,43 @@
   .badge { display: inline-flex; border-radius: 999px; padding: 7px 11px; background: var(--soft); color: var(--uq-purple); font-size: 12px; font-weight: 760; }
 
   .gallery-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
-  .gallery-item { display: none; overflow: hidden; cursor: pointer; padding: 0; transition: transform .2s ease, box-shadow .2s ease; }
-  .gallery-item.ready { display: block; }
+
+  .gallery-item {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    padding: 0;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+
+  .gallery-item.is-missing { display: none; }
+
   .gallery-item:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
-  .gallery-thumb { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--soft); }
-  .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .42s ease; }
+
+  .gallery-thumb {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--soft);
+  }
+
+  .gallery-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .42s ease;
+  }
+
   .gallery-item:hover img { transform: scale(1.045); }
-  .gallery-caption { padding: 14px 16px 16px; color: var(--body); font-size: 13px; line-height: 1.5; }
+
+  .gallery-caption {
+    padding: 14px 16px 16px;
+    color: var(--body);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
   .lightbox { position: fixed; inset: 0; z-index: 100; display: none; place-items: center; padding: 34px; background: rgba(20, 8, 30, .92); cursor: zoom-out; }
   .lightbox.active { display: grid; }
   .lightbox img { max-width: min(1100px, 92vw); max-height: 78vh; object-fit: contain; background: white; border-radius: 18px; box-shadow: 0 24px 80px rgba(0,0,0,.5); }
@@ -491,37 +521,61 @@
       </div>
       <p class="section-intro">Selected photos from lab activities, public engagement and cyber forensics community events.</p>
     </div>
+
     <div class="gallery-grid">
-      <article class="gallery-item" data-caption="DFRWS APAC 2024 with conference organisers and keynote speakers in Brisbane.">
-        <div class="gallery-thumb"><img src="images/gallery/DFRWS_2024_keynote.jpg" alt="DFRWS APAC 2024 group photo with conference organisers and keynote speakers" loading="lazy" /></div>
+      <article class="gallery-item" data-gallery-image="DFRWS_2024_keynote" data-caption="DFRWS APAC 2024 with conference organisers and keynote speakers in Brisbane.">
+        <div class="gallery-thumb">
+          <img src="images/gallery/DFRWS_2024_keynote.jpg" alt="DFRWS APAC 2024 group photo with conference organisers and keynote speakers" loading="lazy" />
+        </div>
         <div class="gallery-caption">DFRWS APAC 2024 · organisers and keynote speakers</div>
       </article>
-      <article class="gallery-item" data-caption="DFRWS APAC 2024 workshop and student volunteers in Brisbane.">
-        <div class="gallery-thumb"><img src="images/gallery/DFRWS_2024_workshop.jpg" alt="DFRWS APAC 2024 workshop with student volunteers" loading="lazy" /></div>
+
+      <article class="gallery-item" data-gallery-image="DFRWS_2024_workshop" data-caption="DFRWS APAC 2024 workshop and student volunteers in Brisbane.">
+        <div class="gallery-thumb">
+          <img src="images/gallery/DFRWS_2024_workshop.jpg" alt="DFRWS APAC 2024 workshop with student volunteers" loading="lazy" />
+        </div>
         <div class="gallery-caption">DFRWS APAC 2024 · workshop and volunteers</div>
       </article>
-      <article class="gallery-item" data-caption="UQ Cyber workshop on AI integration in businesses, efficiency and security risks.">
-        <div class="gallery-thumb"><img src="images/gallery/Workshop_AI_Integration_2025.jpg" alt="Workshop panel on AI integration in businesses and security risks" loading="lazy" /></div>
+
+      <article class="gallery-item" data-gallery-image="Workshop_AI_Integration_2025" data-caption="UQ Cyber workshop on AI integration in businesses, efficiency and security risks.">
+        <div class="gallery-thumb">
+          <img src="images/gallery/Workshop_AI_Integration_2025.jpg" alt="Workshop panel on AI integration in businesses and security risks" loading="lazy" />
+        </div>
         <div class="gallery-caption">AI integration in businesses workshop</div>
       </article>
-      <article class="gallery-item" data-caption="QuASI panel on ethics, law and global priorities in AI governance.">
-        <div class="gallery-thumb"><img src="images/gallery/QuASI_Panel_2025.jpg" alt="QuASI panel on ethics law and AI governance" loading="lazy" /></div>
+
+      <article class="gallery-item" data-gallery-image="QuASI_Panel_2025" data-caption="QuASI panel on ethics, law and global priorities in AI governance.">
+        <div class="gallery-thumb">
+          <img src="images/gallery/QuASI_Panel_2025.jpg" alt="QuASI panel on ethics law and AI governance" loading="lazy" />
+        </div>
         <div class="gallery-caption">QuASI panel · AI governance</div>
       </article>
-      <article class="gallery-item" data-caption="Invited talk to the Queensland Government AI Executive Leadership Program.">
-        <div class="gallery-thumb"><img src="images/gallery/QLD_Govt_AI_Executive_2026.jpg" alt="Invited talk at Queensland Government AI Executive Leadership Program" loading="lazy" /></div>
+
+      <article class="gallery-item" data-gallery-image="QLD_Govt_AI_Executive_2026" data-caption="Invited talk to the Queensland Government AI Executive Leadership Program.">
+        <div class="gallery-thumb">
+          <img src="images/gallery/QLD_Govt_AI_Executive_2026.jpg" alt="Invited talk at Queensland Government AI Executive Leadership Program" loading="lazy" />
+        </div>
         <div class="gallery-caption">Queensland Government AI Executive Leadership Program</div>
       </article>
-      <article class="gallery-item" data-caption="ANU National Youth Science Forum session with Year 12 STEM students at UQ.">
-        <div class="gallery-thumb"><img src="images/gallery/ANU_NYSF_Talk.jpg" alt="ANU National Youth Science Forum cyber security session" loading="lazy" /></div>
+
+      <article class="gallery-item" data-gallery-image="ANU_NYSF_Talk" data-caption="ANU National Youth Science Forum session with Year 12 STEM students at UQ.">
+        <div class="gallery-thumb">
+          <img src="images/gallery/ANU_NYSF_Talk.jpg" alt="ANU National Youth Science Forum cyber security session" loading="lazy" />
+        </div>
         <div class="gallery-caption">ANU National Youth Science Forum</div>
       </article>
-      <article class="gallery-item" data-caption="SDLT 2025 panel on AI-powered distributed ledgers at Deakin University, Melbourne.">
-        <div class="gallery-thumb"><img src="images/gallery/SDLT_2025_Panel.jpg" alt="SDLT 2025 panel on AI-powered distributed ledgers" loading="lazy" /></div>
+
+      <article class="gallery-item" data-gallery-image="SDLT_2025_Panel" data-caption="SDLT 2025 panel on AI-powered distributed ledgers at Deakin University, Melbourne.">
+        <div class="gallery-thumb">
+          <img src="images/gallery/SDLT_2025_Panel.jpg" alt="SDLT 2025 panel on AI-powered distributed ledgers" loading="lazy" />
+        </div>
         <div class="gallery-caption">SDLT 2025 · AI-powered distributed ledgers</div>
       </article>
-      <article class="gallery-item" data-caption="UQ Young Alumni event on deepfakes and online verification.">
-        <div class="gallery-thumb"><img src="images/gallery/UQ_Young_Alumni_2024.jpg" alt="UQ Young Alumni event on deepfakes and online verification" loading="lazy" /></div>
+
+      <article class="gallery-item" data-gallery-image="UQ_Young_Alumni_2024" data-caption="UQ Young Alumni event on deepfakes and online verification.">
+        <div class="gallery-thumb">
+          <img src="images/gallery/UQ_Young_Alumni_2024.jpg" alt="UQ Young Alumni event on deepfakes and online verification" loading="lazy" />
+        </div>
         <div class="gallery-caption">UQ Young Alumni · deepfakes mini masterclass</div>
       </article>
     </div>
@@ -605,9 +659,11 @@
         btn.classList.toggle('active', isActive);
         btn.setAttribute('aria-expanded', String(isActive));
       });
+
       panels.forEach(panel => {
         panel.classList.toggle('active', panel.id === 'detail-' + area);
       });
+
       const activePanel = document.getElementById('detail-' + area);
       if (activePanel) activePanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
@@ -629,47 +685,102 @@
     const lbImg = document.getElementById('lightboxImg');
     const lbCaption = document.getElementById('lightboxCaption');
     const lbClose = document.getElementById('lightboxClose');
-    let visibleGalleryItems = 0;
-    let processedGalleryItems = 0;
 
-    function finishGalleryCheck() {
-      processedGalleryItems += 1;
-      if (processedGalleryItems === galleryItems.length && visibleGalleryItems === 0) {
-        if (gallerySection) gallerySection.remove();
-        if (galleryNav) galleryNav.remove();
+    const galleryFolders = [
+      'images/gallery/',
+      './images/gallery/',
+      'gallery/',
+      './gallery/'
+    ];
+
+    const galleryExtensions = [
+      '.jpg',
+      '.JPG',
+      '.jpeg',
+      '.JPEG',
+      '.png',
+      '.PNG',
+      '.webp',
+      '.WEBP'
+    ];
+
+    function buildGalleryCandidates(item, img) {
+      const baseName = item.dataset.galleryImage;
+      const originalSrc = img.getAttribute('src');
+
+      const candidates = [];
+      if (originalSrc) candidates.push(originalSrc);
+
+      if (baseName) {
+        galleryFolders.forEach(folder => {
+          galleryExtensions.forEach(ext => {
+            candidates.push(folder + baseName + ext);
+          });
+        });
       }
+
+      return Array.from(new Set(candidates));
     }
 
-    galleryItems.forEach(item => {
+    function tryGalleryImage(item) {
       const img = item.querySelector('img');
-      if (!img) { finishGalleryCheck(); return; }
-      img.addEventListener('load', () => {
-        visibleGalleryItems += 1;
-        item.classList.add('ready');
-        finishGalleryCheck();
+      if (!img) {
+        item.classList.add('is-missing');
+        return Promise.resolve(false);
+      }
+
+      const candidates = buildGalleryCandidates(item, img);
+      let index = 0;
+
+      return new Promise(resolve => {
+        function tryNext() {
+          if (index >= candidates.length) {
+            item.classList.add('is-missing');
+            resolve(false);
+            return;
+          }
+
+          const candidate = candidates[index++];
+          const tester = new Image();
+
+          tester.onload = function () {
+            img.src = candidate;
+            item.classList.remove('is-missing');
+            resolve(true);
+          };
+
+          tester.onerror = tryNext;
+          tester.src = candidate;
+        }
+
+        tryNext();
       });
-      img.addEventListener('error', () => {
-        item.remove();
-        finishGalleryCheck();
-      });
-      if (img.complete && img.naturalWidth > 0) {
-        visibleGalleryItems += 1;
-        item.classList.add('ready');
-        finishGalleryCheck();
+    }
+
+    Promise.all(galleryItems.map(item => tryGalleryImage(item))).then(results => {
+      const visibleCount = results.filter(Boolean).length;
+
+      if (visibleCount === 0) {
+        if (gallerySection) gallerySection.remove();
+        if (galleryNav) galleryNav.remove();
       }
     });
 
     function closeLightbox() {
+      if (!lb) return;
       lb.classList.remove('active');
       lb.setAttribute('aria-hidden', 'true');
-      lbImg.src = '';
-      lbCaption.textContent = '';
+      if (lbImg) lbImg.src = '';
+      if (lbCaption) lbCaption.textContent = '';
     }
 
     galleryItems.forEach(item => {
       item.addEventListener('click', () => {
+        if (item.classList.contains('is-missing')) return;
+
         const img = item.querySelector('img');
-        if (!img || !item.classList.contains('ready')) return;
+        if (!img || !img.src) return;
+
         lbImg.src = img.src;
         lbImg.alt = img.alt;
         lbCaption.textContent = item.dataset.caption || '';
@@ -677,10 +788,18 @@
         lb.setAttribute('aria-hidden', 'false');
       });
     });
-    lb.addEventListener('click', closeLightbox);
-    lbClose.addEventListener('click', closeLightbox);
-    lb.querySelector('div').addEventListener('click', event => event.stopPropagation());
-    document.addEventListener('keydown', event => { if (event.key === 'Escape') closeLightbox(); });
+
+    if (lb) lb.addEventListener('click', closeLightbox);
+    if (lbClose) lbClose.addEventListener('click', closeLightbox);
+
+    const lightboxInner = lb ? lb.querySelector('div') : null;
+    if (lightboxInner) {
+      lightboxInner.addEventListener('click', event => event.stopPropagation());
+    }
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') closeLightbox();
+    });
   })();
 </script>
 </body>
