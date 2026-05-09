@@ -1,550 +1,195 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI-enabled Cyber Forensics Lab</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI-enabled Cyber Forensics Lab — University of Queensland</title>
+<meta name="description" content="AI-enabled Cyber Forensics Lab at The University of Queensland, led by Dr Priyanka Singh. Research in deepfake detection, multimedia forensics, privacy-preserving forensics, media provenance and AI security." />
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --uq-purple: #51247a;
+    --uq-purple-dark: #3b185f;
+    --uq-purple-deep: #241035;
+    --uq-gold: #fbb800;
+    --magenta: #962a8b;
+    --ink: #17202a;
+    --body: #344054;
+    --muted: #667085;
+    --line: #e6ddec;
+    --paper: #ffffff;
+    --soft: #f7f2fb;
+    --soft-2: #f1e8f7;
+    --shadow: 0 18px 48px rgba(40, 18, 60, 0.12);
   }
-
+  html { scroll-behavior: smooth; }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
-    background: #f8fafb;
-    color: #1a202c;
-    line-height: 1.6;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #fbfafc;
+    color: var(--ink);
+    line-height: 1.65;
   }
+  a { color: var(--uq-purple); text-decoration: none; font-weight: 750; }
+  a:hover { text-decoration: underline; }
+  img { max-width: 100%; }
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 22px; }
+  .skip-link { position: absolute; left: -999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+  .skip-link:focus { left: 16px; top: 16px; width: auto; height: auto; padding: 10px 14px; background: white; z-index: 1000; border-radius: 8px; box-shadow: var(--shadow); }
 
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-
-  /* Header */
   header {
-    background: linear-gradient(135deg, #ffffff 0%, #F7F3FA 100%);
-    border-bottom: 2px solid #E8DFF0;
-    padding: 16px 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 8px rgba(0, 51, 102, 0.08);
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.94);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
   }
+  nav { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 14px 0; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 900; color: var(--uq-purple); letter-spacing: -0.02em; }
+  .logo:hover { text-decoration: none; }
+  .logo-mark { width: 34px; height: 34px; border-radius: 12px; display: grid; place-items: center; background: linear-gradient(135deg, var(--uq-purple), var(--magenta)); color: white; box-shadow: 0 10px 24px rgba(81,36,122,.25); }
+  .nav-links { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 16px 22px; list-style: none; font-size: 14px; }
+  .nav-links a { color: var(--ink); font-weight: 650; }
+  .nav-links a:hover { color: var(--uq-purple); }
 
-  nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .logo {
-    font-size: 18px;
-    font-weight: 600;
-    background: linear-gradient(135deg, #51247A 0%, #962A8B 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 28px;
-    list-style: none;
-  }
-
-  .nav-links a {
-    text-decoration: none;
-    color: #1a202c;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-  }
-
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #51247A, #962A8B);
-    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .nav-links a:hover::after {
-    width: 100%;
-  }
-
-  /* Hero Section */
   .hero {
-    padding: 100px 0 80px;
-    background: linear-gradient(135deg, #51247A 0%, #3B185F 55%, #2D123F 100%);
-    color: white;
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden; color: white;
+    background:
+      radial-gradient(circle at 88% 10%, rgba(251,184,0,.25), transparent 30%),
+      radial-gradient(circle at 12% 88%, rgba(150,42,139,.44), transparent 32%),
+      linear-gradient(135deg, var(--uq-purple), var(--uq-purple-dark) 58%, var(--uq-purple-deep));
   }
+  .hero::after { content: ""; position: absolute; inset: auto -8% -24% auto; width: 420px; aspect-ratio: 1; border-radius: 50%; background: rgba(255,255,255,.08); filter: blur(2px); }
+  .hero .container { position: relative; z-index: 1; padding-top: 96px; padding-bottom: 84px; }
+  .eyebrow { display: inline-flex; gap: 8px; align-items: center; padding: 8px 12px; border: 1px solid rgba(255,255,255,.28); border-radius: 999px; color: rgba(255,255,255,.9); font-size: 13px; font-weight: 760; background: rgba(255,255,255,.08); }
+  .hero h1 { max-width: 880px; margin-top: 22px; font-size: clamp(42px, 7vw, 72px); line-height: 1.02; letter-spacing: -0.055em; }
+  .hero .subtitle { max-width: 850px; margin-top: 22px; font-size: clamp(18px, 2vw, 24px); color: rgba(255,255,255,.92); font-weight: 560; }
+  .hero .tagline { max-width: 820px; margin-top: 18px; color: rgba(255,255,255,.80); font-size: 16px; }
+  .hero-actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 999px; padding: 12px 17px; font-weight: 850; border: 1px solid transparent; transition: transform .2s ease, box-shadow .2s ease; }
+  .btn:hover { text-decoration: none; transform: translateY(-2px); }
+  .btn-primary { color: var(--uq-purple); background: white; box-shadow: 0 12px 28px rgba(0,0,0,.16); }
+  .btn-secondary { color: white; border-color: rgba(255,255,255,.34); background: rgba(255,255,255,.08); }
 
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -10%;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-    border-radius: 50%;
+  section { padding: 72px 0; border-bottom: 1px solid var(--line); }
+  .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 30px; }
+  h2 { color: var(--uq-purple); font-size: clamp(30px, 4vw, 44px); line-height: 1.1; letter-spacing: -0.035em; }
+  .section-kicker { color: var(--magenta); font-weight: 900; text-transform: uppercase; letter-spacing: .09em; font-size: 12px; margin-bottom: 8px; }
+  .section-intro { max-width: 740px; color: var(--body); font-size: 16px; }
+
+  .about-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) 330px; gap: 48px; align-items: start; }
+  .about-card, .card, .source-box, .team-box, .contact-card, .research-detail, .gallery-item {
+    background: var(--paper); border: 1px solid var(--line); border-radius: 24px; box-shadow: 0 12px 34px rgba(40,18,60,.06);
   }
+  .about-card { padding: 34px; }
+  .about-card p { color: var(--body); margin-bottom: 16px; }
+  .profile-card { padding: 18px; text-align: center; background: white; border: 1px solid var(--line); border-radius: 28px; box-shadow: var(--shadow); }
+  .profile-photo { border-radius: 22px; overflow: hidden; aspect-ratio: 1; background: linear-gradient(135deg, var(--soft), var(--soft-2)); display: block; }
+  .profile-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .profile-card h3 { margin-top: 16px; color: var(--uq-purple); font-size: 20px; }
+  .profile-card p { color: var(--muted); font-size: 14px; margin-top: 4px; }
 
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  }
+  .news-grid, .cards-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+  .card { padding: 24px; display: flex; flex-direction: column; min-height: 100%; transition: transform .2s ease, box-shadow .2s ease; }
+  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+  .tag { display: inline-flex; align-self: flex-start; border-radius: 999px; padding: 5px 10px; background: var(--soft); color: var(--uq-purple); font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: .06em; }
+  .card h3 { margin-top: 14px; color: var(--ink); font-size: 18px; line-height: 1.35; }
+  .card p { color: var(--body); font-size: 14px; margin-top: 10px; }
+  .card .meta { color: var(--magenta); font-weight: 820; font-size: 13px; margin-top: 12px; }
+  .card .link { margin-top: auto; padding-top: 18px; font-size: 13px; }
 
-  .hero h1 {
-    font-size: 48px;
-    font-weight: 700;
-    margin-bottom: 16px;
-    line-height: 1.2;
-    letter-spacing: -0.5px;
-  }
-
-  .hero .subtitle {
-    font-size: 20px;
-    color: rgba(255,255,255,0.95);
-    margin-bottom: 24px;
-    font-weight: 500;
-  }
-
-  .hero .tagline {
-    font-size: 16px;
-    color: rgba(255,255,255,0.85);
-    max-width: 650px;
-    line-height: 1.8;
-  }
-
-  /* Sections */
-  section {
-    padding: 80px 0;
-    border-bottom: 1px solid #E8DFF0;
-    animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  section h2 {
-    font-size: 36px;
-    font-weight: 700;
-    margin-bottom: 48px;
-    color: #51247A;
-    position: relative;
-    padding-bottom: 16px;
-  }
-
-  section h2::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 60px;
-    height: 4px;
-    background: linear-gradient(90deg, #51247A, #962A8B);
-    border-radius: 2px;
-  }
-
-  /* About Section with Photo */
-  .about-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: start;
-  }
-
-  .about-text p {
-    font-size: 16px;
-    line-height: 1.8;
-    margin-bottom: 24px;
-    color: #2d3748;
-  }
-
-  .photo-container {
-    position: relative;
-    animation: slideInRight 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .photo-placeholder {
-    width: 280px;
-    aspect-ratio: 1;
-    background: linear-gradient(135deg, #F7F3FA 0%, #f0e7ff 100%);
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    color: #6b7280;
-    border: 2px dashed #cbd5e1;
-    overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0, 51, 102, 0.1);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    margin: 0 auto;
-  }
-
-  .photo-placeholder:hover {
-    box-shadow: 0 30px 60px rgba(0, 51, 102, 0.15);
-    transform: translateY(-4px);
-  }
-
-  .photo-placeholder img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  /* Research Cards */
-  .research-areas {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 28px;
-    margin-bottom: 32px;
-  }
-
+  #research { background: linear-gradient(180deg, #fff, #fbf7fd); }
+  .research-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
   .research-card {
-    background: white;
-    padding: 32px;
-    border-radius: 12px;
-    border-left: 4px solid #51247A;
-    box-shadow: 0 4px 12px rgba(0, 51, 102, 0.08);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    appearance: none; text-align: left; cursor: pointer;
+    border: 1px solid var(--line); border-left: 5px solid var(--uq-purple);
+    background: white; border-radius: 22px; padding: 24px;
+    box-shadow: 0 12px 28px rgba(40,18,60,.06);
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    min-height: 100%;
   }
+  .research-card:hover, .research-card.active { transform: translateY(-4px); box-shadow: var(--shadow); border-left-color: var(--uq-gold); }
+  .research-card h3 { color: var(--uq-purple); font-size: 18px; line-height: 1.35; margin-bottom: 9px; }
+  .research-card p { color: var(--body); font-size: 14px; }
+  .research-card .open-hint { margin-top: 18px; color: var(--magenta); font-size: 13px; font-weight: 900; }
+  .research-detail { display: none; margin-top: 22px; padding: 28px; animation: rise .24s ease-out; }
+  .research-detail.active { display: block; }
+  .detail-grid { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.25fr); gap: 28px; align-items: start; }
+  .detail-copy h3 { color: var(--uq-purple); font-size: 24px; line-height: 1.2; }
+  .detail-copy p { color: var(--body); margin-top: 14px; }
+  .detail-copy ul { margin: 16px 0 0 18px; color: var(--body); }
+  .detail-copy li { margin-bottom: 8px; }
+  .paper-figure { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 12px; }
+  .paper-figure img { width: 100%; max-height: 620px; object-fit: contain; display: block; border-radius: 12px; background: #fff; }
+  .caption { color: var(--muted); font-size: 12px; line-height: 1.55; margin-top: 10px; }
+  .theme-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 22px; }
+  .theme-pill { border: 1px solid var(--line); background: #fff; border-radius: 18px; padding: 18px; color: var(--body); font-size: 14px; }
+  .theme-pill strong { color: var(--uq-purple); display: block; margin-bottom: 6px; }
 
-  .research-card:hover {
-    box-shadow: 0 12px 24px rgba(0, 51, 102, 0.15);
-    transform: translateY(-4px);
-    border-left-color: #51247A;
+  .pub-panel { display: grid; grid-template-columns: 1.05fr .95fr; gap: 22px; align-items: stretch; }
+  .pub-panel .card { min-height: auto; }
+  .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .badge { display: inline-flex; border-radius: 999px; padding: 7px 11px; background: var(--soft); color: var(--uq-purple); font-size: 12px; font-weight: 760; }
+
+  .gallery-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+  .gallery-item { display: none; overflow: hidden; cursor: pointer; padding: 0; transition: transform .2s ease, box-shadow .2s ease; }
+  .gallery-item.ready { display: block; }
+  .gallery-item:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+  .gallery-thumb { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--soft); }
+  .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .42s ease; }
+  .gallery-item:hover img { transform: scale(1.045); }
+  .gallery-caption { padding: 14px 16px 16px; color: var(--body); font-size: 13px; line-height: 1.5; }
+  .lightbox { position: fixed; inset: 0; z-index: 100; display: none; place-items: center; padding: 34px; background: rgba(20, 8, 30, .92); cursor: zoom-out; }
+  .lightbox.active { display: grid; }
+  .lightbox img { max-width: min(1100px, 92vw); max-height: 78vh; object-fit: contain; background: white; border-radius: 18px; box-shadow: 0 24px 80px rgba(0,0,0,.5); }
+  .lightbox p { color: white; max-width: 900px; text-align: center; margin-top: 14px; font-size: 14px; }
+  .lightbox button { position: absolute; top: 18px; right: 18px; width: 44px; height: 44px; border-radius: 999px; border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1); color: white; font-size: 24px; cursor: pointer; }
+
+  .team-grid, .contact-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+  .team-box, .contact-card { padding: 24px; }
+  .team-box h3, .contact-card h3, .source-box h3 { color: var(--uq-purple); font-size: 18px; margin-bottom: 10px; }
+  .team-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 18px; margin-top: 12px; }
+  .team-list div { color: var(--body); font-size: 14px; }
+  .source-box { padding: 22px; background: linear-gradient(135deg, var(--soft), #fff); }
+  .source-box ul { margin-left: 20px; color: var(--body); }
+  .source-box li { margin-bottom: 8px; }
+
+  footer { background: var(--uq-purple-deep); color: rgba(255,255,255,.82); padding: 34px 0; text-align: center; font-size: 13px; }
+  footer a { color: white; }
+
+  @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 1040px) {
+    .research-grid, .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
-
-  .research-card h3 {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 12px;
-    color: #51247A;
+  @media (max-width: 920px) {
+    nav { align-items: flex-start; flex-direction: column; }
+    .about-grid, .detail-grid, .pub-panel { grid-template-columns: 1fr; }
+    .news-grid, .cards-grid, .team-grid, .contact-grid, .theme-strip { grid-template-columns: 1fr 1fr; }
   }
-
-  .research-card p {
-    font-size: 14px;
-    color: #4a5568;
-    line-height: 1.7;
-  }
-
-  /* Publications */
-  .publications-summary {
-    background: linear-gradient(135deg, #F7F3FA 0%, #F2ECF6 100%);
-    padding: 40px;
-    border-radius: 12px;
-    border-left: 4px solid #51247A;
-    margin-bottom: 32px;
-  }
-
-  .pub-stats {
-    display: flex;
-    gap: 60px;
-    margin-bottom: 24px;
-  }
-
-  .pub-stat {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .pub-stat .number {
-    font-size: 40px;
-    font-weight: 700;
-    color: #51247A;
-  }
-
-  .pub-stat .label {
-    font-size: 13px;
-    color: #4a5568;
-    font-weight: 500;
-    margin-top: 4px;
-  }
-
-  /* Workshops */
-  .workshop-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 28px;
-  }
-
-  .workshop-card {
-    background: white;
-    padding: 32px;
-    border-radius: 12px;
-    border-top: 4px solid #51247A;
-    box-shadow: 0 4px 12px rgba(0, 51, 102, 0.08);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .workshop-card:hover {
-    box-shadow: 0 12px 24px rgba(0, 51, 102, 0.15);
-    transform: translateY(-4px);
-    border-top-color: #51247A;
-  }
-
-  .workshop-card h3 {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: #51247A;
-  }
-
-  .workshop-date {
-    font-size: 13px;
-    color: #51247A;
-    font-weight: 500;
-    margin-bottom: 12px;
-  }
-
-  .workshop-desc {
-    font-size: 14px;
-    color: #4a5568;
-    line-height: 1.7;
-  }
-
-  .workshop-link {
-    display: inline-block;
-    margin-top: 16px;
-    font-size: 13px;
-    text-decoration: none;
-    color: #51247A;
-    font-weight: 600;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .workshop-link:hover {
-    color: #51247A;
-    transform: translateX(4px);
-  }
-
-  /* Team Section */
-  .team-section {
-    background: linear-gradient(135deg, #F7F3FA 0%, #F2ECF6 100%);
-    padding: 32px;
-    border-radius: 12px;
-    border-left: 4px solid #51247A;
-    margin-bottom: 24px;
-  }
-
-  .team-section h3 {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 16px;
-    color: #51247A;
-  }
-
-  .team-section p {
-    font-size: 14px;
-    color: #4a5568;
-    line-height: 1.8;
-  }
-
-  .student-members {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 10px 24px;
-    margin-top: 8px;
-  }
-
-  .student-members div {
-    font-size: 14px;
-    color: #4a5568;
-    line-height: 1.8;
-  }
-
-  /* Contact */
-  .contact-info {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 28px;
-    margin-bottom: 32px;
-  }
-
-  .contact-card {
-    background: white;
-    padding: 28px;
-    border-radius: 12px;
-    border: 1px solid #E8DFF0;
-    box-shadow: 0 2px 8px rgba(0, 51, 102, 0.06);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .contact-card:hover {
-    box-shadow: 0 8px 16px rgba(0, 51, 102, 0.12);
-    transform: translateY(-2px);
-  }
-
-  .contact-card h3 {
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: #51247A;
-  }
-
-  .contact-card p {
-    font-size: 14px;
-    color: #4a5568;
-    line-height: 1.7;
-  }
-
-  .contact-card a {
-    color: #51247A;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s;
-  }
-
-  .contact-card a:hover {
-    color: #51247A;
-  }
-
-  .collaboration-box {
-    background: linear-gradient(135deg, #F7F3FA 0%, #F2ECF6 100%);
-    border: 2px solid #51247A;
-    padding: 32px;
-    border-radius: 12px;
-    text-align: center;
-    margin-top: 32px;
-  }
-
-  .collaboration-box p {
-    font-size: 14px;
-    color: #2d3748;
-    line-height: 1.8;
-  }
-
-  /* Footer */
-  footer {
-    background: linear-gradient(135deg, #51247A 0%, #2D123F 100%);
-    color: rgba(255,255,255,0.9);
-    padding: 40px 0;
-    text-align: center;
-    border-top: 2px solid #51247A;
-  }
-
-  footer p {
-    margin-bottom: 8px;
-    font-size: 13px;
-  }
-
-  footer a {
-    color: rgba(255,255,255,0.95);
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s;
-  }
-
-  footer a:hover {
-    color: #fff;
-  }
-
-  /* Badges */
-  .badge {
-    display: inline-block;
-    background: #E8DFF0;
-    color: #51247A;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 500;
-    margin: 4px 6px 4px 0;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .badge:hover {
-    background: #EADDF2;
-    transform: translateY(-2px);
-  }
-
-  /* Animations */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes slideInRight {
-    from {
-      opacity: 0;
-      transform: translateX(40px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  /* Responsive */
-  @media (max-width: 768px) {
-    .nav-links {
-      gap: 15px;
-      font-size: 12px;
-    }
-
-    .hero h1 {
-      font-size: 32px;
-    }
-
-    .about-container {
-      grid-template-columns: 1fr;
-      gap: 40px;
-    }
-
-    .pub-stats {
-      gap: 30px;
-    }
-
-    .pub-stat .number {
-      font-size: 32px;
-    }
-
-    section h2 {
-      font-size: 28px;
-      margin-bottom: 32px;
-    }
+  @media (max-width: 640px) {
+    .hero .container { padding-top: 72px; padding-bottom: 64px; }
+    .nav-links { gap: 12px 14px; }
+    section { padding: 54px 0; }
+    .news-grid, .cards-grid, .research-grid, .gallery-grid, .team-grid, .contact-grid, .team-list, .theme-strip { grid-template-columns: 1fr; }
+    .about-card, .research-detail { padding: 22px; }
   }
 </style>
 </head>
 <body>
-
+<a class="skip-link" href="#main">Skip to content</a>
 <header>
   <div class="container">
-    <nav>
-      <div class="logo">🔬 AI-enabled Cyber Forensics Lab</div>
+    <nav aria-label="Primary navigation">
+      <a class="logo" href="#top" aria-label="AI-enabled Cyber Forensics Lab home">
+        <span class="logo-mark">AI</span>
+        <span>AI-enabled Cyber Forensics Lab</span>
+      </a>
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
+        <li><a href="#news">News</a></li>
         <li><a href="#research">Research</a></li>
         <li><a href="#publications">Publications</a></li>
         <li><a href="#workshops">Workshops</a></li>
-        <li><a href="#news">News</a></li>
+        <li id="galleryNav"><a href="#gallery">Gallery</a></li>
         <li><a href="#team">Team</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -552,199 +197,491 @@
   </div>
 </header>
 
-<section class="hero">
+<main id="main">
+<section class="hero" id="top">
   <div class="container">
-    <div class="hero-content">
-      <h1>AI-enabled Cyber Forensics Lab</h1>
-      <p class="subtitle">School of Electrical Engineering and Computer Science, University of Queensland</p>
-      <p class="tagline">Advancing AI-driven detection and forensic analysis of manipulated media through multimodal learning, privacy-preserving techniques, and explainable frameworks for real-world impact.</p>
+    <span class="eyebrow">University of Queensland · School of EECS · UQ Cyber</span>
+    <h1>Cyber forensics that explains what happened, not just what a model predicted.</h1>
+    <p class="subtitle">Research in deepfake detection, multimedia forensics, privacy-preserving analysis, media provenance and AI security.</p>
+    <p class="tagline">The lab builds practical AI-enabled systems for authenticating manipulated media, analysing cross-modal evidence and producing explanations that investigators, journalists, platform reviewers and non-expert users can act on.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#research">Explore research areas</a>
+      <a class="btn btn-secondary" href="https://about.uq.edu.au/experts/41970">View UQ Experts profile</a>
     </div>
   </div>
 </section>
 
 <section id="about">
   <div class="container">
-    <h2>About the Group</h2>
-    <div class="about-container">
-      <div class="about-text">
-        <p>
-          Led by Dr. Priyanka Singh, a Senior Lecturer in Cyber Security, our research group focuses on tackling the critical challenges posed by deepfakes, synthetic media, and multimodal misinformation. With a PhD in Image Forensics and postdoctoral experience at prestigious institutions (SUNY Albany, Dartmouth College), Dr. Singh brings expertise in digital forensics, cybersecurity, privacy-preserving techniques, and AI-driven content authentication.
-        </p>
-        <p>
-          We work at the intersection of computer vision, multimedia forensics, and AI security, developing robust detection frameworks and evaluation benchmarks that serve high-stakes applications in elections, healthcare, law enforcement, and platform integrity.
-        </p>
-        <p style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #E8DFF0; color: #4a5568; font-size: 13px;">
-          <strong>Collaborations:</strong> We actively collaborate with government agencies, media integrity organizations, industry partners, and international research communities to advance the state-of-the-art in misinformation detection.
-        </p>
-      </div>
-      <div class="photo-container">
-        <div class="photo-placeholder">
-          <img src="priyanka-singh.png" alt="Dr. Priyanka Singh">
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="research">
-  <div class="container">
-    <h2>Research Areas</h2>
-    <div class="research-areas">
-      <div class="research-card">
-        <h3>🖼️ Multimodal Misinformation</h3>
-        <p>Detection and analysis of falsified or staged visual content combined with misleading captions, addressing narrative-level inconsistencies beyond pixel-level artifacts.</p>
-      </div>
-      <div class="research-card">
-        <h3>🎭 Deepfake Detection & Attribution</h3>
-        <p>Audio, visual, and video forensic techniques to identify synthetic media generation methods and trace manipulation origins with explainability for non-expert users.</p>
-      </div>
-      <div class="research-card">
-        <h3>🔐 Privacy-Preserving Forensics</h3>
-        <p>Secure approaches using homomorphic encryption and secret sharing for authentication and tampering detection without exposing sensitive data.</p>
-      </div>
-      <div class="research-card">
-        <h3>⚔️ AI Safety & Adversarial Robustness</h3>
-        <p>Mitigation of AI-based attacks including adversarial perturbations, jailbreak prompts, and coordinated abuse in vision-language systems.</p>
-      </div>
-      <div class="research-card">
-        <h3>💡 Explainable AI for Media Verification</h3>
-        <p>Interactive and human-interpretable frameworks enabling non-expert users to understand deepfake detection decisions and verify content authenticity.</p>
-      </div>
-      <div class="research-card">
-        <h3>🛡️ Cyber Threat Intelligence Sharing</h3>
-        <p>Secure and collaborative approaches to CTI data exchange with robust privacy protection for AI-driven cybersecurity incident response.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="publications">
-  <div class="container">
-    <h2>Publications & Impact</h2>
-    <div class="publications-summary">
-      <div class="pub-stats">
-        <div class="pub-stat">
-          <div class="number">74</div>
-          <div class="label">Total publications</div>
-        </div>
-        <div class="pub-stat">
-          <div class="number">24</div>
-          <div class="label">Journal articles</div>
-        </div>
-        <div class="pub-stat">
-          <div class="number">50</div>
-          <div class="label">Conference papers</div>
-        </div>
-      </div>
-      <p style="font-size: 14px; color: #2d3748; line-height: 1.8;">
-        available on <a href="https://scholar.google.com/citations?user=n1pfC-0AAAAJ&hl=en" class="workshop-link">→ Google Scholar</a>
-      </p>
-    </div>
-    <div style="background: white; padding: 24px; border-radius: 12px; border: 1px solid #E8DFF0;">
-      <p style="font-size: 13px; color: #4a5568; margin-bottom: 12px;"><strong style="color: #51247A;">Keywords:</strong></p>
+    <div class="section-head">
       <div>
-        <span class="badge">Deepfake detection</span>
-        <span class="badge">Multimodal forensics</span>
-        <span class="badge">Privacy preservation</span>
-        <span class="badge">Homomorphic encryption</span>
-        <span class="badge">Misinformation detection</span>
-        <span class="badge">Audio deepfakes</span>
-        <span class="badge">AI safety</span>
-        <span class="badge">Explainable AI</span>
-        <span class="badge">Digital forensics</span>
-        <span class="badge">Media authentication</span>
+        <div class="section-kicker">About</div>
+        <h2>Applied forensic AI for high-stakes digital evidence.</h2>
       </div>
     </div>
-  </div>
-</section>
-
-<section id="workshops">
-  <div class="container">
-    <h2>Workshops & Community</h2>
-    <div class="workshop-grid">
-      <div class="workshop-card">
-        <h3>PP-MisDet @ CVPR 2026</h3>
-        <p class="workshop-date">📅 June 3–4, 2026 • Denver, USA</p>
-        <p class="workshop-desc"><strong>From Perception to Persuasion: Challenges and Advances in Misinformation Detection in Society.</strong> Co-organized workshop bringing together computer vision, multimedia forensics, policy, and platform integrity experts.</p>
-        <p class="workshop-desc" style="margin-top: 12px; font-size: 13px;">Featured challenge: <strong>DGM4+ benchmark</strong> on contextual manipulation detection with textual grounding and multi-task learning.</p>
-        <a href="https://eecs.uq.edu.au/CVPR2026" class="workshop-link">→ Visit workshop site</a>
+    <div class="about-grid">
+      <div class="about-card">
+        <p>Led by <strong>Dr Priyanka Singh</strong>, Senior Lecturer in Cyber Security at The University of Queensland, the group works across cyber security, digital forensics, privacy and security, homomorphic encryption, cloud computing and AI-enabled content authentication.</p>
+        <p>Our core problem is urgent: synthetic and manipulated media is becoming easier to generate, harder to detect and more persuasive when paired with misleading captions or narratives. The lab studies the full chain from manipulation and propagation to detection, explanation, provenance and trustworthy user-facing verification.</p>
+        <p>We focus on systems that can survive real deployment: robust models, auditable evidence, privacy-aware workflows and outputs that people outside a benchmark setting can understand.</p>
       </div>
-      <div class="workshop-card">
-        <h3>IMPACT @ ACM Multimedia 2026</h3>
-        <p class="workshop-date">📅 November 10–14, 2026 • Rio de Janeiro, Brazil</p>
-        <p class="workshop-desc"><strong>IMPACT: International Multimedia Perception and Content Technology.</strong> Advancing techniques for multimodal media analysis, authenticity verification, and harm mitigation in digital ecosystems.</p>
-        <p class="workshop-desc" style="margin-top: 12px; font-size: 13px;"><strong>Focus Areas:</strong> Multimodal forensics, deepfake detection, explainability, and real-world platform applications.</p>
-        <a href="https://impact-initiative.github.io/" class="workshop-link">→ Workshop site</a>
-      </div>
-      <div class="workshop-card">
-        <h3>DFRWS APAC 2024 Workshop</h3>
-        <p class="workshop-date">📅 October 22, 2024 • Brisbane, Australia</p>
-        <p class="workshop-desc"><strong>Understanding and Analyzing Executable and Linkable Format (ELF) Files.</strong> Workshop by Parag Rughani and Priyanka Singh focused on ELF file internals and their role in malware analysis.</p>
-        <p class="workshop-desc" style="margin-top: 12px; font-size: 13px;"><strong>Focus Areas:</strong> Digital forensics, Linux binary analysis, malware analysis, and executable file structures.</p>
-        <a href="https://dfrws.org/presentation/dfrws-apac-2024-understanding-and-analyzing-executable-and-linkable-format-elf-files/" class="workshop-link">→ View workshop</a>
-      </div>
-
+      <aside class="profile-card" aria-label="Dr Priyanka Singh profile card">
+        <div class="profile-photo"><img src="priyanka-singh.png" alt="Dr Priyanka Singh" /></div>
+        <h3>Dr Priyanka Singh</h3>
+        <p>Senior Lecturer in Cyber Security<br />Affiliate, UQ Cyber Research Centre</p>
+      </aside>
     </div>
   </div>
 </section>
 
 <section id="news">
   <div class="container">
-    <h2>Recent Achievements & News</h2>
-    <div class="team-section">
-      <p>Stay tuned for updates on our recent achievements, publications, workshops, student milestones, and group news.</p>
+    <div class="section-head">
+      <div>
+        <div class="section-kicker">News</div>
+        <h2>Recent news and public updates.</h2>
+      </div>
+      <p class="section-intro">Current activities across workshops, public commentary and cyber security community engagement.</p>
+    </div>
+    <div class="news-grid">
+      <article class="card">
+        <span class="tag">CVPR 2026</span>
+        <h3>PP-MisDet listed as a CVPR 2026 workshop.</h3>
+        <p>The workshop focuses on how falsified or staged visual content is created, circulated, trusted and operationalised in high-stakes settings such as elections, health and conflict.</p>
+        <p class="meta">CVPR 2026 · Denver</p>
+        <a class="link" href="https://eecs.uq.edu.au/CVPR2026">Workshop page →</a>
+      </article>
+      <article class="card">
+        <span class="tag">ACM MM 2026</span>
+        <h3>IMPACT accepted as an ACM Multimedia 2026 workshop.</h3>
+        <p>IMPACT focuses on impact-aware multimodal persuasive analysis, contextual trust, provenance, explainable verification and severity-aware misinformation evaluation.</p>
+        <p class="meta">ACM MM 2026 · Rio de Janeiro</p>
+        <a class="link" href="https://impact-initiative.github.io/">Workshop page →</a>
+      </article>
+      <article class="card">
+        <span class="tag">ICC 2026</span>
+        <h3>UQ Cyber and AUSCERT to host the International Cybersecurity Challenge.</h3>
+        <p>The 2026 International Cybersecurity Challenge will be held on the Gold Coast from 18–21 May, bringing global cyber talent to Australia.</p>
+        <p class="meta">UQ Cyber · 18–21 May 2026</p>
+        <a class="link" href="https://www.cyber.uq.edu.au/event/1536/international-cybersecurity-challenge-2026">Event page →</a>
+      </article>
+      <article class="card">
+        <span class="tag">Media commentary</span>
+        <h3>ABC News Hour commentary on the Canvas data breach.</h3>
+        <p>Dr Singh discussed the global Canvas breach affecting education institutions and the importance of calm, evidence-based public cyber security communication.</p>
+        <p class="meta">ABC News Hour · May 2026</p>
+      </article>
+      <article class="card">
+        <span class="tag">ABC News</span>
+        <h3>Expert commentary on AI-generated fake digital IDs.</h3>
+        <p>ABC News quoted Dr Singh on the rise of AI-generated fake digital IDs and the risks created when synthetic identity documents become easy to produce.</p>
+        <p class="meta">ABC News · 2025</p>
+        <a class="link" href="https://www.abc.net.au/news/2025-11-22/digital-fake-ids-on-the-rise-queensland/105958526">Read ABC story →</a>
+      </article>
+      <article class="card">
+        <span class="tag">Public guide</span>
+        <h3>How to spot a deepfake video.</h3>
+        <p>UQ Contact asked Dr Singh to explain deepfake risks and practical verification cues for public audiences in the Sora 2 era.</p>
+        <p class="meta">UQ Contact</p>
+        <a class="link" href="https://stories.uq.edu.au/contact-magazine/how-to-spot-a-deepfake-video/index.html">Read guide →</a>
+      </article>
+      <article class="card">
+        <span class="tag">Public guide</span>
+        <h3>What even are internet cookies?</h3>
+        <p>UQ Contact featured Dr Singh in a plain-language explainer on cookies, tracking, login persistence and online privacy.</p>
+        <p class="meta">UQ Contact</p>
+        <a class="link" href="https://stories.uq.edu.au/contact-magazine/what-even-are-cookies/index.html">Read story →</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="research">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-kicker">Research</div>
+        <h2>Research areas.</h2>
+      </div>
+      <p class="section-intro">Select a research area to view the explanation.</p>
+    </div>
+
+    <div class="research-grid" role="tablist" aria-label="Research areas">
+      <button class="research-card" data-area="media" aria-expanded="false" aria-controls="detail-media">
+        <h3>Multimodal misinformation &amp; media provenance</h3>
+        <p>Understanding how manipulated images, videos and captions shape belief, trust and downstream decisions.</p>
+        <div class="open-hint">View figure</div>
+      </button>
+      <button class="research-card" data-area="deepfake" aria-expanded="false" aria-controls="detail-deepfake">
+        <h3>Explainable deepfake detection</h3>
+        <p>Moving from black-box real/fake labels to visual, semantic and narrative explanations.</p>
+        <div class="open-hint">View figure</div>
+      </button>
+      <button class="research-card" data-area="privacy" aria-expanded="false" aria-controls="detail-privacy">
+        <h3>Privacy-preserving forensics</h3>
+        <p>Running forensic checks on protected data without exposing the original media.</p>
+        <div class="open-hint">View figure</div>
+      </button>
+      <button class="research-card" data-area="evaluation" aria-expanded="false" aria-controls="detail-evaluation">
+        <h3>Interactive forensic evaluation</h3>
+        <p>Designing interfaces and evaluation protocols that support human reasoning and review.</p>
+        <div class="open-hint">View figure</div>
+      </button>
+    </div>
+
+    <article class="research-detail" id="detail-media">
+      <div class="detail-grid">
+        <div class="detail-copy">
+          <h3>Multimodal misinformation &amp; media provenance</h3>
+          <p>This area studies manipulation as a communication problem, not just a pixel-level artefact problem. A persuasive fake can use a real image with a misleading caption, a generated image with a true caption, or a coordinated package of image, text and source context.</p>
+          <ul>
+            <li>Analyse image–text inconsistency and narrative-level mismatch.</li>
+            <li>Support provenance and authentication services for non-expert users.</li>
+            <li>Evaluate systems in high-stakes settings such as elections, health, conflict and public safety.</li>
+          </ul>
+        </div>
+        <figure class="paper-figure">
+          <img src="images/paper-diagrams/dfp2e-fig1-problem-and-solution.png" alt="DF-P2E paper figure comparing conventional deepfake detectors with an explanation-oriented framework" loading="lazy" />
+          <figcaption class="caption">Figure from Tariq, Woo, Singh, Irmalasari, Gupta and Gupta, “From Prediction to Explanation: Multimodal, Explainable, and Interactive Deepfake Detection Framework for Non-Expert Users,” ACM Multimedia 2025.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="research-detail" id="detail-deepfake">
+      <div class="detail-grid">
+        <div class="detail-copy">
+          <h3>Explainable deepfake detection</h3>
+          <p>DF-P2E reframes deepfake detection as an explanation pipeline. Instead of stopping at a confidence score, it combines a detector, Grad-CAM-style visual evidence, image-to-text captioning and LLM-based narrative refinement so users can inspect the reasons behind a verdict.</p>
+          <ul>
+            <li>Classifier output gives the initial real/fake decision and confidence.</li>
+            <li>Visual evidence highlights suspicious regions.</li>
+            <li>Captioning and narrative modules translate forensic cues into readable explanations.</li>
+          </ul>
+        </div>
+        <figure class="paper-figure">
+          <img src="images/paper-diagrams/dfp2e-fig2-workflow.png" alt="DF-P2E workflow showing dataset, preprocessing, detector, XAI methods, image-to-text model and final explanation" loading="lazy" />
+          <figcaption class="caption">Figure from the DF-P2E paper showing the prediction-to-explanation workflow.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="research-detail" id="detail-privacy">
+      <div class="detail-grid">
+        <div class="detail-copy">
+          <h3>Privacy-preserving forensics</h3>
+          <p>Privacy-preserving media forensics asks whether forensic matching or tamper checks can be performed without handing over sensitive plaintext media. Robust homomorphic image hashing shows how secure matching can operate on encrypted images while remaining robust to benign transformations.</p>
+          <ul>
+            <li>Encrypted-domain analysis helps protect sensitive user or institutional media.</li>
+            <li>Hash-based methods can support identification of known harmful or previously identified content.</li>
+            <li>The research direction connects multimedia forensics with homomorphic encryption, secret sharing and secure cloud workflows.</li>
+          </ul>
+        </div>
+        <figure class="paper-figure">
+          <img src="images/paper-diagrams/rhih-fig1-histogram-hash.png" alt="Robust Homomorphic Image Hashing figure showing a two-dimensional image histogram used for hashing" loading="lazy" />
+          <figcaption class="caption">Figure from Singh and Farid, “Robust Homomorphic Image Hashing,” CVPR Workshops 2019.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="research-detail" id="detail-evaluation">
+      <div class="detail-grid">
+        <div class="detail-copy">
+          <h3>Interactive forensic evaluation</h3>
+          <p>Useful forensic systems should localise suspicious evidence, explain model decisions, remain calibrated under distribution shift and support user interaction. The aim is to make detection outputs usable for people who need to act on them.</p>
+          <ul>
+            <li>Evaluate classifier confidence alongside explanation quality.</li>
+            <li>Measure whether visual evidence and textual explanations align.</li>
+            <li>Build interfaces that let users ask follow-up questions about a forensic verdict.</li>
+          </ul>
+        </div>
+        <figure class="paper-figure">
+          <img src="images/paper-diagrams/dfp2e-fig3-interface.png" alt="DF-P2E interface showing upload, detection result, Grad-CAM analysis and user-facing explanation" loading="lazy" />
+          <figcaption class="caption">Figure from the DF-P2E paper showing an interactive user-facing analysis workflow.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <div class="theme-strip" aria-label="Additional research themes">
+      <div class="theme-pill"><strong>AI safety and LLM security</strong>Prompt injection, jailbreaks, AI-enabled attacks and model misuse in cyber workflows.</div>
+      <div class="theme-pill"><strong>Cyber threat intelligence sharing</strong>Secure collaborative CTI workflows that reduce privacy leakage while improving incident response.</div>
+      <div class="theme-pill"><strong>Adversarial robustness</strong>Detection systems designed for adaptive manipulation and distribution shift rather than clean benchmark conditions.</div>
+    </div>
+  </div>
+</section>
+
+<section id="publications">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-kicker">Publications</div>
+        <h2>Publications and technical themes.</h2>
+      </div>
+    </div>
+    <div class="pub-panel">
+      <article class="card">
+        <span class="tag">Research profiles</span>
+        <h3>Selected themes across the group’s work.</h3>
+        <p>The group’s public research profiles span digital forensics, multimedia forensics, encrypted-domain processing, cloud security, privacy-preserving AI and deepfake detection.</p>
+        <div class="badges">
+          <span class="badge">Digital forensics</span>
+          <span class="badge">Multimedia forensics</span>
+          <span class="badge">Encrypted-domain processing</span>
+          <span class="badge">Deepfake detection</span>
+          <span class="badge">Privacy-preserving AI</span>
+          <span class="badge">AI safety</span>
+        </div>
+        <a class="link" href="https://about.uq.edu.au/experts/41970">UQ Experts profile →</a>
+      </article>
+      <article class="source-box">
+        <h3>Paper-linked assets used on this page</h3>
+        <ul>
+          <li><a href="https://arxiv.org/abs/2508.07596">DF-P2E: From Prediction to Explanation</a> — figures for explainable deepfake detection, multimodal provenance and interactive verification.</li>
+          <li><a href="https://openaccess.thecvf.com/content_CVPRW_2019/html/Media_Forensics/Singh_Robust_Homomorphic_Image_Hashing_CVPRW_2019_paper.html">Robust Homomorphic Image Hashing</a> — figure for privacy-preserving media forensics.</li>
+          <li><a href="https://about.uq.edu.au/experts/project/72373">Authentication and Provenance of Manipulated Media</a> — UQ project page connected to media authentication and provenance.</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="workshops">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-kicker">Workshops</div>
+        <h2>Workshops and community activity.</h2>
+      </div>
+    </div>
+    <div class="cards-grid">
+      <article class="card">
+        <span class="tag">CVPR 2026</span>
+        <h3>PP-MisDet: From Perception to Persuasion</h3>
+        <p>A CVPR workshop on multimodal misinformation, falsified visual evidence and trustworthy evaluation in high-stakes settings.</p>
+        <a class="link" href="https://eecs.uq.edu.au/CVPR2026">Workshop site →</a>
+      </article>
+      <article class="card">
+        <span class="tag">ACM MM 2026</span>
+        <h3>IMPACT: Impact-aware Multimodal Persuasive Analysis and Contextual Trust</h3>
+        <p>An ACM Multimedia 2026 workshop on multimedia-native, persuasion-optimised misinformation, contextual trust, provenance, robustness and human-centred verification.</p>
+        <p class="meta">ACM Multimedia 2026 · Rio de Janeiro · 10–14 November 2026</p>
+        <a class="link" href="https://impact-initiative.github.io/">Workshop site →</a>
+      </article>
+      <article class="card">
+        <span class="tag">DFRWS APAC 2024</span>
+        <h3>Understanding and analysing ELF files</h3>
+        <p>Workshop by Parag Rughani and Priyanka Singh on Linux binary internals and malicious ELF analysis.</p>
+        <a class="link" href="https://dfrws.org/presentation/dfrws-apac-2024-understanding-and-analyzing-executable-and-linkable-format-elf-files/">DFRWS page →</a>
+      </article>
+      <article class="card">
+        <span class="tag">Public engagement</span>
+        <h3>Deepfakes, cookies and public cyber literacy</h3>
+        <p>Plain-language outreach helping non-expert audiences understand manipulated media, online tracking and everyday security risks.</p>
+        <a class="link" href="https://stories.uq.edu.au/contact-magazine/how-to-spot-a-deepfake-video/index.html">Read public guide →</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" data-gallery-section>
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-kicker">Gallery</div>
+        <h2>Workshops, talks and community moments.</h2>
+      </div>
+      <p class="section-intro">Selected photos from lab activities, public engagement and cyber forensics community events.</p>
+    </div>
+    <div class="gallery-grid">
+      <article class="gallery-item" data-caption="DFRWS APAC 2024 with conference organisers and keynote speakers in Brisbane.">
+        <div class="gallery-thumb"><img src="images/gallery/DFRWS_2024_keynote.jpg" alt="DFRWS APAC 2024 group photo with conference organisers and keynote speakers" loading="lazy" /></div>
+        <div class="gallery-caption">DFRWS APAC 2024 · organisers and keynote speakers</div>
+      </article>
+      <article class="gallery-item" data-caption="DFRWS APAC 2024 workshop and student volunteers in Brisbane.">
+        <div class="gallery-thumb"><img src="images/gallery/DFRWS_2024_workshop.jpg" alt="DFRWS APAC 2024 workshop with student volunteers" loading="lazy" /></div>
+        <div class="gallery-caption">DFRWS APAC 2024 · workshop and volunteers</div>
+      </article>
+      <article class="gallery-item" data-caption="UQ Cyber workshop on AI integration in businesses, efficiency and security risks.">
+        <div class="gallery-thumb"><img src="images/gallery/Workshop_AI_Integration_2025.jpg" alt="Workshop panel on AI integration in businesses and security risks" loading="lazy" /></div>
+        <div class="gallery-caption">AI integration in businesses workshop</div>
+      </article>
+      <article class="gallery-item" data-caption="QuASI panel on ethics, law and global priorities in AI governance.">
+        <div class="gallery-thumb"><img src="images/gallery/QuASI_Panel_2025.jpg" alt="QuASI panel on ethics law and AI governance" loading="lazy" /></div>
+        <div class="gallery-caption">QuASI panel · AI governance</div>
+      </article>
+      <article class="gallery-item" data-caption="Invited talk to the Queensland Government AI Executive Leadership Program.">
+        <div class="gallery-thumb"><img src="images/gallery/QLD_Govt_AI_Executive_2026.jpg" alt="Invited talk at Queensland Government AI Executive Leadership Program" loading="lazy" /></div>
+        <div class="gallery-caption">Queensland Government AI Executive Leadership Program</div>
+      </article>
+      <article class="gallery-item" data-caption="ANU National Youth Science Forum session with Year 12 STEM students at UQ.">
+        <div class="gallery-thumb"><img src="images/gallery/ANU_NYSF_Talk.jpg" alt="ANU National Youth Science Forum cyber security session" loading="lazy" /></div>
+        <div class="gallery-caption">ANU National Youth Science Forum</div>
+      </article>
+      <article class="gallery-item" data-caption="SDLT 2025 panel on AI-powered distributed ledgers at Deakin University, Melbourne.">
+        <div class="gallery-thumb"><img src="images/gallery/SDLT_2025_Panel.jpg" alt="SDLT 2025 panel on AI-powered distributed ledgers" loading="lazy" /></div>
+        <div class="gallery-caption">SDLT 2025 · AI-powered distributed ledgers</div>
+      </article>
+      <article class="gallery-item" data-caption="UQ Young Alumni event on deepfakes and online verification.">
+        <div class="gallery-thumb"><img src="images/gallery/UQ_Young_Alumni_2024.jpg" alt="UQ Young Alumni event on deepfakes and online verification" loading="lazy" /></div>
+        <div class="gallery-caption">UQ Young Alumni · deepfakes mini masterclass</div>
+      </article>
     </div>
   </div>
 </section>
 
 <section id="team">
   <div class="container">
-    <h2>Team & Mentoring</h2>
-    <div class="team-section">
-      <h3>👩‍🔬 Leadership</h3>
-      <p><strong>Dr. Priyanka Singh</strong><br>Senior Lecturer, UQ Cyber Research Centre<br>School of Electrical Engineering and Computer Science</p>
-      <p style="margin-top: 16px;">Available for supervision of PhD and Masters research projects. Active areas: split learning robustness, privacy-aware deepfake detection, LLM security, multimodal fusion, autonomous cyber defence.</p>
-    </div>
-    <div class="team-section">
-      <h3>👥 Student Team</h3>
-      <div class="student-members">
-        <div>Gagandeep Singh</div>
-        <div>Samudi Amarasinghe</div>
-        <div>Urawee Thani</div>
+    <div class="section-head">
+      <div>
+        <div class="section-kicker">Team</div>
+        <h2>People and mentoring.</h2>
       </div>
+    </div>
+    <div class="team-grid">
+      <article class="team-box">
+        <h3>Leadership</h3>
+        <p><strong>Dr Priyanka Singh</strong><br />Senior Lecturer in Cyber Security<br />School of Electrical Engineering and Computer Science<br />Affiliate, UQ Cyber Research Centre</p>
+      </article>
+      <article class="team-box" style="grid-column: span 2;">
+        <h3>Student team</h3>
+        <div class="team-list">
+          <div><strong>Gagandeep Singh</strong><br />Multimodal manipulation detection · T-IMPACT</div>
+          <div><strong>Samudi Amarasinghe</strong><br />Cyber forensics &amp; AI security</div>
+          <div><strong>Urawee Thani</strong><br />Cyber forensics &amp; AI security</div>
+        </div>
+      </article>
     </div>
   </div>
 </section>
 
 <section id="contact">
   <div class="container">
-    <h2>Contact & Collaboration</h2>
-    <div class="contact-info">
-      <div class="contact-card">
-        <h3>📧 Email</h3>
-        <p><a href="mailto:priyanka.singh@uq.edu.au">priyanka.singh@uq.edu.au</a></p>
-      </div>
-      <div class="contact-card">
-        <h3>🏫 Affiliation</h3>
-        <p>University of Queensland<br>School of EECS<br>Brisbane, Australia</p>
-      </div>
-      <div class="contact-card">
-        <h3>🔗 Research Profiles</h3>
-        <p><a href="https://about.uq.edu.au/experts/41970">UQ Experts</a><br><a href="https://www.cyber.uq.edu.au/profile/1382/priyanka-singh">UQ Cyber Centre</a><br><a href="https://orcid.org/0000-0001-5002-8800">ORCID</a></p>
+    <div class="section-head">
+      <div>
+        <div class="section-kicker">Contact</div>
+        <h2>Contact and collaboration.</h2>
       </div>
     </div>
-    <div class="collaboration-box">
-      <p><strong style="font-size: 15px;">Interested in collaboration, internships, or research partnerships?</strong><br>We welcome inquiries from industry, government, and academic institutions.</p>
+    <div class="contact-grid">
+      <article class="contact-card">
+        <h3>Email</h3>
+        <p><a href="mailto:priyanka.singh@uq.edu.au">priyanka.singh@uq.edu.au</a></p>
+      </article>
+      <article class="contact-card">
+        <h3>Affiliation</h3>
+        <p>The University of Queensland<br />School of Electrical Engineering and Computer Science<br />Brisbane, Australia</p>
+      </article>
+      <article class="contact-card">
+        <h3>Research profiles</h3>
+        <p><a href="https://about.uq.edu.au/experts/41970">UQ Experts</a><br /><a href="https://www.cyber.uq.edu.au/profile/1382/priyanka-singh">UQ Cyber Centre</a><br /><a href="https://orcid.org/0000-0001-5002-8800">ORCID</a><br /><a href="https://scholar.google.com/citations?user=n1pfC-0AAAAJ&amp;hl=en">Google Scholar</a></p>
+      </article>
     </div>
   </div>
 </section>
+</main>
 
 <footer>
   <div class="container">
-    <p style="margin-bottom: 12px; font-size: 14px;">AI-enabled Cyber Forensics Lab • University of Queensland School of EECS</p>
-    <p style="font-size: 12px; opacity: 0.9;">© 2026. For supervision opportunities and collaboration inquiries, please get in touch.</p>
+    <p><strong>AI-enabled Cyber Forensics Lab</strong> · University of Queensland · School of Electrical Engineering and Computer Science</p>
+    <p>Research in multimedia forensics, privacy-preserving cyber security and trustworthy AI-enabled verification.</p>
   </div>
 </footer>
 
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button type="button" id="lightboxClose" aria-label="Close gallery image">×</button>
+  <div>
+    <img id="lightboxImg" alt="" />
+    <p id="lightboxCaption"></p>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const buttons = Array.from(document.querySelectorAll('.research-card'));
+    const panels = Array.from(document.querySelectorAll('.research-detail'));
+
+    function selectArea(area) {
+      buttons.forEach(btn => {
+        const isActive = btn.dataset.area === area;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-expanded', String(isActive));
+      });
+      panels.forEach(panel => {
+        panel.classList.toggle('active', panel.id === 'detail-' + area);
+      });
+      const activePanel = document.getElementById('detail-' + area);
+      if (activePanel) activePanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    buttons.forEach(btn => btn.addEventListener('click', () => selectArea(btn.dataset.area)));
+
+    const profileImg = document.querySelector('.profile-photo img');
+    if (profileImg) {
+      profileImg.addEventListener('error', () => {
+        const wrap = profileImg.closest('.profile-photo');
+        if (wrap) wrap.style.display = 'none';
+      });
+    }
+
+    const gallerySection = document.querySelector('[data-gallery-section]');
+    const galleryNav = document.getElementById('galleryNav');
+    const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightboxImg');
+    const lbCaption = document.getElementById('lightboxCaption');
+    const lbClose = document.getElementById('lightboxClose');
+    let visibleGalleryItems = 0;
+    let processedGalleryItems = 0;
+
+    function finishGalleryCheck() {
+      processedGalleryItems += 1;
+      if (processedGalleryItems === galleryItems.length && visibleGalleryItems === 0) {
+        if (gallerySection) gallerySection.remove();
+        if (galleryNav) galleryNav.remove();
+      }
+    }
+
+    galleryItems.forEach(item => {
+      const img = item.querySelector('img');
+      if (!img) { finishGalleryCheck(); return; }
+      img.addEventListener('load', () => {
+        visibleGalleryItems += 1;
+        item.classList.add('ready');
+        finishGalleryCheck();
+      });
+      img.addEventListener('error', () => {
+        item.remove();
+        finishGalleryCheck();
+      });
+      if (img.complete && img.naturalWidth > 0) {
+        visibleGalleryItems += 1;
+        item.classList.add('ready');
+        finishGalleryCheck();
+      }
+    });
+
+    function closeLightbox() {
+      lb.classList.remove('active');
+      lb.setAttribute('aria-hidden', 'true');
+      lbImg.src = '';
+      lbCaption.textContent = '';
+    }
+
+    galleryItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const img = item.querySelector('img');
+        if (!img || !item.classList.contains('ready')) return;
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        lbCaption.textContent = item.dataset.caption || '';
+        lb.classList.add('active');
+        lb.setAttribute('aria-hidden', 'false');
+      });
+    });
+    lb.addEventListener('click', closeLightbox);
+    lbClose.addEventListener('click', closeLightbox);
+    lb.querySelector('div').addEventListener('click', event => event.stopPropagation());
+    document.addEventListener('keydown', event => { if (event.key === 'Escape') closeLightbox(); });
+  })();
+</script>
 </body>
 </html>
