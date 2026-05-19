@@ -1,206 +1,228 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>AI-enabled Cyber Forensics Lab — University of Queensland</title>
+<title>AI-enabled Cyber Forensics Lab | University of Queensland</title>
 <meta name="description" content="AI-enabled Cyber Forensics Lab at The University of Queensland, led by Dr Priyanka Singh. Research in deepfake detection, multimedia forensics, privacy-preserving forensics, media provenance and AI security." />
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
+    /* UQ accent, kept as a single colour used sparingly */
     --uq-purple: #51247a;
-    --uq-purple-dark: #3b185f;
-    --uq-purple-deep: #241035;
-    --uq-gold: #fbb800;
-    --magenta: #962a8b;
-    --ink: #17202a;
-    --body: #344054;
-    --muted: #667085;
-    --line: #e6ddec;
+    --uq-purple-soft: #7a4ea8;
+    --uq-gold: #c8a13a;
+
+    /* Neutral, sleeker base palette */
+    --ink: #15181d;
+    --body: #3f444c;
+    --muted: #6b7280;
+    --line: #ececef;
+    --line-strong: #d9d9de;
     --paper: #ffffff;
-    --soft: #f7f2fb;
-    --soft-2: #f1e8f7;
-    --shadow: 0 18px 48px rgba(40, 18, 60, 0.12);
+    --bg: #fafafa;
+    --tint: #f6f3fa;     /* very subtle purple tint */
+    --shadow: 0 6px 22px rgba(20, 22, 28, 0.05);
+    --shadow-strong: 0 14px 34px rgba(20, 22, 28, 0.08);
+    --radius: 14px;
+    --radius-lg: 20px;
   }
   html { scroll-behavior: smooth; }
   body {
     font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background: #fbfafc;
+    background: var(--bg);
     color: var(--ink);
     line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
   }
-  a { color: var(--uq-purple); text-decoration: none; font-weight: 750; }
+  a { color: var(--uq-purple); text-decoration: none; font-weight: 600; }
   a:hover { text-decoration: underline; }
-  img { max-width: 100%; }
-  .container { max-width: 1180px; margin: 0 auto; padding: 0 22px; }
-  .skip-link { position: absolute; left: -999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
-  .skip-link:focus { left: 16px; top: 16px; width: auto; height: auto; padding: 10px 14px; background: white; z-index: 1000; border-radius: 8px; box-shadow: var(--shadow); }
+  img { max-width: 100%; display: block; }
+  .container { max-width: 1140px; margin: 0 auto; padding: 0 22px; }
+  .skip-link { position: absolute; left: -999px; }
+  .skip-link:focus { left: 16px; top: 16px; padding: 10px 14px; background: white; z-index: 1000; border-radius: 8px; box-shadow: var(--shadow); }
 
+  /* ---------- Header ---------- */
   header {
     position: sticky; top: 0; z-index: 50;
-    background: rgba(255,255,255,0.94);
-    backdrop-filter: blur(12px);
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--line);
   }
   nav { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 14px 0; }
-  .logo { display: flex; align-items: center; gap: 10px; font-weight: 900; color: var(--uq-purple); letter-spacing: -0.02em; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; color: var(--ink); letter-spacing: -0.01em; font-size: 15px; }
   .logo:hover { text-decoration: none; }
-  .logo-mark { width: 34px; height: 34px; border-radius: 12px; display: grid; place-items: center; background: linear-gradient(135deg, var(--uq-purple), var(--magenta)); color: white; box-shadow: 0 10px 24px rgba(81,36,122,.25); }
-  .nav-links { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 16px 22px; list-style: none; font-size: 14px; }
-  .nav-links a { color: var(--ink); font-weight: 650; }
+  .logo-mark { width: 10px; height: 28px; border-radius: 3px; background: var(--uq-purple); }
+  .nav-links { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 6px 22px; list-style: none; font-size: 14px; }
+  .nav-links a { color: var(--body); font-weight: 500; }
   .nav-links a:hover { color: var(--uq-purple); }
 
-  .hero {
-    position: relative; overflow: hidden; color: white;
-    background:
-      radial-gradient(circle at 88% 10%, rgba(251,184,0,.25), transparent 30%),
-      radial-gradient(circle at 12% 88%, rgba(150,42,139,.44), transparent 32%),
-      linear-gradient(135deg, var(--uq-purple), var(--uq-purple-dark) 58%, var(--uq-purple-deep));
+  /* ---------- Hero (lowkey, mostly neutral) ---------- */
+  .hero { position: relative; overflow: hidden; background: var(--paper); border-bottom: 1px solid var(--line); }
+  .hero::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 90% 10%, rgba(81,36,122,0.05), transparent 60%);
+    pointer-events: none;
   }
-  .hero::after { content: ""; position: absolute; inset: auto -8% -24% auto; width: 420px; aspect-ratio: 1; border-radius: 50%; background: rgba(255,255,255,.08); filter: blur(2px); }
-  .hero .container { position: relative; z-index: 1; padding-top: 96px; padding-bottom: 84px; }
-  .eyebrow { display: inline-flex; gap: 8px; align-items: center; padding: 8px 12px; border: 1px solid rgba(255,255,255,.28); border-radius: 999px; color: rgba(255,255,255,.9); font-size: 13px; font-weight: 760; background: rgba(255,255,255,.08); }
-  .hero h1 { max-width: 880px; margin-top: 22px; font-size: clamp(42px, 7vw, 72px); line-height: 1.02; letter-spacing: -0.055em; }
-  .hero .subtitle { max-width: 850px; margin-top: 22px; font-size: clamp(18px, 2vw, 24px); color: rgba(255,255,255,.92); font-weight: 560; }
-  .hero .tagline { max-width: 820px; margin-top: 18px; color: rgba(255,255,255,.80); font-size: 16px; }
-  .hero-actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 12px; }
-  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 999px; padding: 12px 17px; font-weight: 850; border: 1px solid transparent; transition: transform .2s ease, box-shadow .2s ease; }
-  .btn:hover { text-decoration: none; transform: translateY(-2px); }
-  .btn-primary { color: var(--uq-purple); background: white; box-shadow: 0 12px 28px rgba(0,0,0,.16); }
-  .btn-secondary { color: white; border-color: rgba(255,255,255,.34); background: rgba(255,255,255,.08); }
-
-  section { padding: 72px 0; border-bottom: 1px solid var(--line); }
-  .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 30px; }
-  h2 { color: var(--uq-purple); font-size: clamp(30px, 4vw, 44px); line-height: 1.1; letter-spacing: -0.035em; }
-  .section-kicker { color: var(--magenta); font-weight: 900; text-transform: uppercase; letter-spacing: .09em; font-size: 12px; margin-bottom: 8px; }
-  .section-intro { max-width: 740px; color: var(--body); font-size: 16px; }
-
-  .about-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) 330px; gap: 48px; align-items: start; }
-  .about-card, .card, .source-box, .team-box, .contact-card, .research-detail, .gallery-item {
-    background: var(--paper); border: 1px solid var(--line); border-radius: 24px; box-shadow: 0 12px 34px rgba(40,18,60,.06);
+  .hero .container { position: relative; padding-top: 110px; padding-bottom: 110px; max-width: 980px; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 6px 12px;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    color: var(--uq-purple);
+    font-size: 12px; font-weight: 700;
+    background: white;
+    letter-spacing: 0.02em;
   }
-  .about-card { padding: 34px; }
-  .about-card p { color: var(--body); margin-bottom: 16px; }
-  .profile-card { padding: 18px; text-align: center; background: white; border: 1px solid var(--line); border-radius: 28px; box-shadow: var(--shadow); }
-  .profile-photo { border-radius: 22px; overflow: hidden; aspect-ratio: 1; background: linear-gradient(135deg, var(--soft), var(--soft-2)); display: block; }
+  .eyebrow::before { content: ""; width: 6px; height: 6px; border-radius: 999px; background: var(--uq-purple); }
+  .hero h1 {
+    max-width: 880px; margin-top: 26px;
+    font-size: clamp(42px, 6.5vw, 68px); line-height: 1.02; letter-spacing: -0.04em;
+    color: var(--ink); font-weight: 800;
+  }
+  .hero h1 em { font-style: normal; color: var(--uq-purple); }
+  .hero .subtitle { max-width: 720px; margin-top: 22px; font-size: clamp(17px, 1.6vw, 20px); color: var(--body); font-weight: 400; line-height: 1.55; }
+  .hero-actions { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; padding: 11px 18px; font-weight: 700; border: 1px solid transparent; transition: transform .15s ease, box-shadow .15s ease, background .15s ease; font-size: 14px; }
+  .btn:hover { text-decoration: none; transform: translateY(-1px); }
+  .btn-primary { color: white; background: var(--uq-purple); }
+  .btn-primary:hover { background: var(--uq-purple-soft); }
+  .btn-secondary { color: var(--ink); border-color: var(--line-strong); background: white; }
+  .btn-secondary:hover { border-color: var(--uq-purple); color: var(--uq-purple); }
+
+  /* ---------- Sections ---------- */
+  section { padding: 80px 0; border-bottom: 1px solid var(--line); }
+  .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 36px; flex-wrap: wrap; }
+  h2 { color: var(--ink); font-size: clamp(26px, 3.4vw, 36px); line-height: 1.15; letter-spacing: -0.025em; font-weight: 800; }
+  .section-kicker { color: var(--uq-purple); font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; font-size: 11px; margin-bottom: 8px; }
+  .section-intro { max-width: 580px; color: var(--muted); font-size: 15px; }
+
+  /* ---------- About ---------- */
+  .about-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) 320px; gap: 44px; align-items: start; }
+  .about-card, .card, .team-card, .contact-card, .research-detail, .gallery-item, .profile-card {
+    background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-lg);
+  }
+  .about-card { padding: 32px; }
+  .about-card p { color: var(--body); margin-bottom: 14px; }
+  .about-card p:last-child { margin-bottom: 0; }
+  .profile-card { padding: 18px; text-align: center; box-shadow: var(--shadow); }
+  .profile-photo { border-radius: var(--radius); overflow: hidden; aspect-ratio: 1; background: var(--tint); display: block; }
   .profile-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .profile-card h3 { margin-top: 16px; color: var(--uq-purple); font-size: 20px; }
-  .profile-card p { color: var(--muted); font-size: 14px; margin-top: 4px; }
+  .profile-card h3 { margin-top: 14px; color: var(--ink); font-size: 18px; font-weight: 700; }
+  .profile-card p { color: var(--muted); font-size: 13px; margin-top: 4px; }
 
-  .news-grid, .cards-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
-  .card { padding: 24px; display: flex; flex-direction: column; min-height: 100%; transition: transform .2s ease, box-shadow .2s ease; }
-  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
-  .tag { display: inline-flex; align-self: flex-start; border-radius: 999px; padding: 5px 10px; background: var(--soft); color: var(--uq-purple); font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: .06em; }
-  .card h3 { margin-top: 14px; color: var(--ink); font-size: 18px; line-height: 1.35; }
-  .card p { color: var(--body); font-size: 14px; margin-top: 10px; }
-  .card .meta { color: var(--magenta); font-weight: 820; font-size: 13px; margin-top: 12px; }
-  .card .link { margin-top: auto; padding-top: 18px; font-size: 13px; }
+  /* ---------- Cards (news, workshops) ---------- */
+  .news-grid, .cards-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .card { padding: 22px; display: flex; flex-direction: column; transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease; }
+  .card:hover { transform: translateY(-2px); box-shadow: var(--shadow); border-color: var(--line-strong); }
+  .tag { display: inline-flex; align-self: flex-start; border-radius: 999px; padding: 4px 10px; background: var(--tint); color: var(--uq-purple); font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+  .card h3 { margin-top: 12px; color: var(--ink); font-size: 17px; line-height: 1.35; font-weight: 700; }
+  .card p { color: var(--body); font-size: 14px; margin-top: 8px; }
+  .card .meta { color: var(--muted); font-weight: 600; font-size: 12px; margin-top: 10px; }
+  .card .link { margin-top: auto; padding-top: 14px; font-size: 13px; }
 
-  #research { background: linear-gradient(180deg, #fff, #fbf7fd); }
-  .research-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+  /* ---------- Research ---------- */
+  #research { background: linear-gradient(180deg, var(--bg), white 60%); }
+  .research-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
   .research-card {
-    appearance: none; text-align: left; cursor: pointer;
-    border: 1px solid var(--line); border-left: 5px solid var(--uq-purple);
-    background: white; border-radius: 22px; padding: 24px;
-    box-shadow: 0 12px 28px rgba(40,18,60,.06);
-    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-    min-height: 100%;
-  }
-  .research-card:hover, .research-card.active { transform: translateY(-4px); box-shadow: var(--shadow); border-left-color: var(--uq-gold); }
-  .research-card h3 { color: var(--uq-purple); font-size: 18px; line-height: 1.35; margin-bottom: 9px; }
-  .research-card p { color: var(--body); font-size: 14px; }
-  .research-card .open-hint { margin-top: 18px; color: var(--magenta); font-size: 13px; font-weight: 900; }
-  .research-detail { display: none; margin-top: 22px; padding: 28px; animation: rise .24s ease-out; }
-  .research-detail.active { display: block; }
-  .detail-grid { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.25fr); gap: 28px; align-items: start; }
-  .detail-copy h3 { color: var(--uq-purple); font-size: 24px; line-height: 1.2; }
-  .detail-copy p { color: var(--body); margin-top: 14px; }
-  .detail-copy ul { margin: 16px 0 0 18px; color: var(--body); }
-  .detail-copy li { margin-bottom: 8px; }
-  .paper-figure { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 12px; }
-  .paper-figure img { width: 100%; max-height: 620px; object-fit: contain; display: block; border-radius: 12px; background: #fff; }
-  .caption { color: var(--muted); font-size: 12px; line-height: 1.55; margin-top: 10px; }
-  .theme-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 22px; }
-  .theme-pill { border: 1px solid var(--line); background: #fff; border-radius: 18px; padding: 18px; color: var(--body); font-size: 14px; }
-  .theme-pill strong { color: var(--uq-purple); display: block; margin-bottom: 6px; }
-
-  .pub-panel { display: grid; grid-template-columns: 1.05fr .95fr; gap: 22px; align-items: stretch; }
-  .pub-panel .card { min-height: auto; }
-  .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-  .badge { display: inline-flex; border-radius: 999px; padding: 7px 11px; background: var(--soft); color: var(--uq-purple); font-size: 12px; font-weight: 760; }
-
-  .gallery-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
-
-  .gallery-item {
-    display: block;
-    overflow: hidden;
-    cursor: pointer;
-    padding: 0;
-    transition: transform .2s ease, box-shadow .2s ease;
-  }
-
-  .gallery-item.is-missing { display: none; }
-
-  .gallery-item:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
-
-  .gallery-thumb {
+    appearance: none; text-align: left; cursor: pointer; font: inherit;
+    border: 1px solid var(--line);
+    background: white; border-radius: var(--radius-lg); padding: 22px;
+    transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
     position: relative;
-    aspect-ratio: 4 / 3;
-    overflow: hidden;
-    background: var(--soft);
   }
-
-  .gallery-thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform .42s ease;
+  .research-card::before {
+    content: ""; position: absolute; left: 22px; top: 22px;
+    width: 28px; height: 3px; border-radius: 2px; background: var(--uq-purple);
+    opacity: 0.4; transition: opacity .2s ease, width .2s ease;
   }
+  .research-card:hover, .research-card.active { transform: translateY(-2px); border-color: var(--uq-purple); box-shadow: var(--shadow); }
+  .research-card:hover::before, .research-card.active::before { opacity: 1; width: 44px; }
+  .research-card h3 { color: var(--ink); font-size: 17px; line-height: 1.35; margin: 18px 0 8px; font-weight: 700; }
+  .research-card p { color: var(--body); font-size: 14px; }
+  .research-card .open-hint { margin-top: 14px; color: var(--uq-purple); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
 
-  .gallery-item:hover img { transform: scale(1.045); }
+  .research-detail { display: none; margin-top: 22px; padding: 32px; animation: rise .24s ease-out; }
+  .research-detail.active { display: block; }
+  .detail-copy h3 { color: var(--ink); font-size: 24px; line-height: 1.2; font-weight: 800; }
+  .detail-copy > p { color: var(--body); margin-top: 12px; font-size: 15px; }
+  .detail-copy ul { margin: 14px 0 0 18px; color: var(--body); font-size: 14px; }
+  .detail-copy li { margin-bottom: 6px; }
 
-  .gallery-caption {
-    padding: 14px 16px 16px;
-    color: var(--body);
-    font-size: 13px;
-    line-height: 1.5;
-  }
+  .figure-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 26px; }
+  .figure-grid.cols-1 { grid-template-columns: 1fr; }
+  .figure-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .paper-figure { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px; display: flex; flex-direction: column; }
+  .paper-figure img { width: 100%; max-height: 400px; object-fit: contain; border-radius: 8px; background: white; }
+  .caption { color: var(--muted); font-size: 12px; line-height: 1.55; margin-top: 10px; }
+  .caption strong { color: var(--ink); font-weight: 600; }
 
-  .lightbox { position: fixed; inset: 0; z-index: 100; display: none; place-items: center; padding: 34px; background: rgba(20, 8, 30, .92); cursor: zoom-out; }
+  .theme-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 28px; }
+  .theme-pill { border: 1px solid var(--line); background: white; border-radius: var(--radius); padding: 16px; color: var(--body); font-size: 13px; }
+  .theme-pill strong { color: var(--ink); display: block; margin-bottom: 4px; font-weight: 700; }
+
+  /* ---------- Publications ---------- */
+  .pub-panel { display: grid; grid-template-columns: 1fr; gap: 18px; }
+  .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .badge { display: inline-flex; border-radius: 999px; padding: 5px 11px; background: var(--tint); color: var(--uq-purple); font-size: 12px; font-weight: 600; }
+
+  /* ---------- Gallery ---------- */
+  .gallery-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+  .gallery-item { display: block; overflow: hidden; cursor: pointer; padding: 0; transition: transform .2s ease, box-shadow .2s ease; }
+  .gallery-item.is-missing { display: none; }
+  .gallery-item:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+  .gallery-thumb { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--tint); }
+  .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .42s ease; }
+  .gallery-item:hover img { transform: scale(1.04); }
+  .gallery-caption { padding: 12px 14px 14px; color: var(--body); font-size: 13px; line-height: 1.5; }
+
+  .lightbox { position: fixed; inset: 0; z-index: 100; display: none; place-items: center; padding: 34px; background: rgba(15, 17, 21, 0.92); cursor: zoom-out; }
   .lightbox.active { display: grid; }
-  .lightbox img { max-width: min(1100px, 92vw); max-height: 78vh; object-fit: contain; background: white; border-radius: 18px; box-shadow: 0 24px 80px rgba(0,0,0,.5); }
+  .lightbox img { max-width: min(1100px, 92vw); max-height: 78vh; object-fit: contain; background: white; border-radius: 14px; box-shadow: 0 24px 80px rgba(0,0,0,.5); }
   .lightbox p { color: white; max-width: 900px; text-align: center; margin-top: 14px; font-size: 14px; }
-  .lightbox button { position: absolute; top: 18px; right: 18px; width: 44px; height: 44px; border-radius: 999px; border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1); color: white; font-size: 24px; cursor: pointer; }
+  .lightbox button { position: absolute; top: 18px; right: 18px; width: 40px; height: 40px; border-radius: 999px; border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1); color: white; font-size: 22px; cursor: pointer; }
 
-  .team-grid, .contact-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
-  .team-box, .contact-card { padding: 24px; }
-  .team-box h3, .contact-card h3, .source-box h3 { color: var(--uq-purple); font-size: 18px; margin-bottom: 10px; }
-  .team-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 18px; margin-top: 12px; }
-  .team-list div { color: var(--body); font-size: 14px; }
-  .source-box { padding: 22px; background: linear-gradient(135deg, var(--soft), #fff); }
-  .source-box ul { margin-left: 20px; color: var(--body); }
-  .source-box li { margin-bottom: 8px; }
+  /* ---------- Team ---------- */
+  .team-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+  .team-card { padding: 22px; display: flex; flex-direction: column; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+  .team-card:hover { transform: translateY(-2px); border-color: var(--uq-purple); box-shadow: var(--shadow); }
+  .team-photo { width: 84px; height: 84px; border-radius: 50%; overflow: hidden; background: var(--tint); margin-bottom: 14px; border: 1px solid var(--line); }
+  .team-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .team-name { color: var(--ink); font-size: 17px; font-weight: 700; }
+  .team-role { color: var(--muted); font-size: 13px; margin-top: 2px; }
+  .team-keywords { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .team-keywords .badge { font-size: 11px; padding: 4px 9px; }
+  .team-bio { color: var(--body); font-size: 13.5px; margin-top: 12px; line-height: 1.55; }
+  .team-card .link { margin-top: auto; padding-top: 14px; font-size: 13px; }
 
-  footer { background: var(--uq-purple-deep); color: rgba(255,255,255,.82); padding: 34px 0; text-align: center; font-size: 13px; }
-  footer a { color: white; }
+  /* ---------- Contact ---------- */
+  .contact-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+  .contact-card { padding: 22px; }
+  .contact-card h3 { color: var(--ink); font-size: 15px; margin-bottom: 8px; font-weight: 700; }
+  .contact-card p, .contact-card a { color: var(--body); font-size: 14px; }
+
+  /* ---------- Footer ---------- */
+  footer { background: white; color: var(--muted); padding: 32px 0; text-align: center; font-size: 13px; border-top: 1px solid var(--line); }
+  footer strong { color: var(--ink); }
+  footer a { color: var(--uq-purple); }
 
   @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
   @media (max-width: 1040px) {
     .research-grid, .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .figure-grid.cols-3 { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 920px) {
-    nav { align-items: flex-start; flex-direction: column; }
-    .about-grid, .detail-grid, .pub-panel { grid-template-columns: 1fr; }
+    nav { align-items: flex-start; flex-direction: column; gap: 10px; }
+    .about-grid, .pub-panel { grid-template-columns: 1fr; }
     .news-grid, .cards-grid, .team-grid, .contact-grid, .theme-strip { grid-template-columns: 1fr 1fr; }
+    .figure-grid, .figure-grid.cols-3 { grid-template-columns: 1fr; }
   }
   @media (max-width: 640px) {
-    .hero .container { padding-top: 72px; padding-bottom: 64px; }
-    .nav-links { gap: 12px 14px; }
-    section { padding: 54px 0; }
-    .news-grid, .cards-grid, .research-grid, .gallery-grid, .team-grid, .contact-grid, .team-list, .theme-strip { grid-template-columns: 1fr; }
+    .hero .container { padding-top: 64px; padding-bottom: 56px; }
+    section { padding: 56px 0; }
+    .news-grid, .cards-grid, .research-grid, .gallery-grid, .team-grid, .contact-grid, .theme-strip { grid-template-columns: 1fr; }
     .about-card, .research-detail { padding: 22px; }
   }
 </style>
@@ -211,7 +233,7 @@
   <div class="container">
     <nav aria-label="Primary navigation">
       <a class="logo" href="#top" aria-label="AI-enabled Cyber Forensics Lab home">
-        
+        <span class="logo-mark" aria-hidden="true"></span>
         <span>AI-enabled Cyber Forensics Lab</span>
       </a>
       <ul class="nav-links">
@@ -231,13 +253,12 @@
 <main id="main">
 <section class="hero" id="top">
   <div class="container">
-    <span class="eyebrow">University of Queensland · School of EECS · UQ Cyber</span>
-    <h1>Cyber forensics that explains what happened, not just what a model predicted.</h1>
-    <p class="subtitle">Research in deepfake detection, multimedia forensics, privacy-preserving analysis, media provenance and AI security.</p>
-    <p class="tagline">The lab builds practical AI-enabled systems for authenticating manipulated media, analysing cross-modal evidence and producing explanations that investigators, journalists, platform reviewers and non-expert users can act on.</p>
+    <span class="eyebrow">University of Queensland · School of EECS</span>
+    <h1>Detection you can <em>defend</em>. Explanations you can <em>act on</em>.</h1>
+    <p class="subtitle">Research across deepfake detection, multimodal misinformation, audio forensics, and AI security.</p>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="#research">Explore research areas</a>
-      <a class="btn btn-secondary" href="https://about.uq.edu.au/experts/41970">View UQ Experts profile</a>
+      <a class="btn btn-primary" href="#research">Explore research</a>
+      <a class="btn btn-secondary" href="#contact">Get in touch</a>
     </div>
   </div>
 </section>
@@ -247,7 +268,7 @@
     <div class="section-head">
       <div>
         <div class="section-kicker">About</div>
-        <h2>Applied forensic AI for high-stakes digital evidence.</h2>
+        <h2>Applied forensic AI for high-stakes digital evidence</h2>
       </div>
     </div>
     <div class="about-grid">
@@ -270,34 +291,34 @@
     <div class="section-head">
       <div>
         <div class="section-kicker">News</div>
-        <h2>Recent news and public updates.</h2>
+        <h2>Recent news and public updates</h2>
       </div>
       <p class="section-intro">Recent public commentary, cyber security engagement and lab updates.</p>
     </div>
     <div class="news-grid">
       <article class="card">
         <span class="tag">ICC 2026</span>
-        <h3>UQ Cyber and AUSCERT to host the International Cybersecurity Challenge.</h3>
+        <h3>UQ Cyber and AUSCERT to host the International Cybersecurity Challenge</h3>
         <p>The 2026 International Cybersecurity Challenge will be held on the Gold Coast from 18–21 May, bringing global cyber talent to Australia.</p>
         <p class="meta">UQ Cyber · 18–21 May 2026</p>
         <a class="link" href="https://www.cyber.uq.edu.au/event/1536/international-cybersecurity-challenge-2026">Event page →</a>
       </article>
       <article class="card">
         <span class="tag">Media commentary</span>
-        <h3>ABC News Hour commentary on the Canvas data breach.</h3>
+        <h3>ABC News Hour commentary on the Canvas data breach</h3>
         <p>Dr Singh discussed the global Canvas breach affecting education institutions and the importance of calm, evidence-based public cyber security communication.</p>
         <p class="meta">ABC News Hour · May 2026</p>
       </article>
       <article class="card">
         <span class="tag">ABC News</span>
-        <h3>Expert commentary on AI-generated fake digital IDs.</h3>
+        <h3>Expert commentary on AI-generated fake digital IDs</h3>
         <p>ABC News quoted Dr Singh on the rise of AI-generated fake digital IDs and the risks created when synthetic identity documents become easy to produce.</p>
         <p class="meta">ABC News · 2025</p>
         <a class="link" href="https://www.abc.net.au/news/2025-11-22/digital-fake-ids-on-the-rise-queensland/105958526">Read ABC story →</a>
       </article>
       <article class="card">
         <span class="tag">Public guide</span>
-        <h3>How to spot a deepfake video.</h3>
+        <h3>How to spot a deepfake video</h3>
         <p>UQ Contact asked Dr Singh to explain deepfake risks and practical verification cues for public audiences in the Sora 2 era.</p>
         <p class="meta">UQ Contact</p>
         <a class="link" href="https://stories.uq.edu.au/contact-magazine/how-to-spot-a-deepfake-video/index.html">Read guide →</a>
@@ -318,110 +339,197 @@
     <div class="section-head">
       <div>
         <div class="section-kicker">Research</div>
-        <h2>Research areas.</h2>
+        <h2>Research areas</h2>
       </div>
-      <p class="section-intro">Select a research area to view the explanation.</p>
+      <p class="section-intro">Six active research directions across multimedia forensics, network security, audio deepfake detection and AI safety. Select a card to view figures and context from the underlying papers.</p>
     </div>
 
     <div class="research-grid" role="tablist" aria-label="Research areas">
-      <button class="research-card" data-area="media" aria-expanded="false" aria-controls="detail-media">
-        <h3>Multimodal misinformation &amp; media provenance</h3>
-        <p>Understanding how manipulated images, videos and captions shape belief, trust and downstream decisions.</p>
-        <div class="open-hint">View figure</div>
+      <button class="research-card" data-area="multimodal" aria-expanded="false" aria-controls="detail-multimodal">
+        <h3>Multimodal manipulation &amp; misinformation detection</h3>
+        <p>Region-aware reasoning over images and captions, and dual-source pipelines that combine internal manipulation cues with external retrieval-based evidence.</p>
+        <div class="open-hint">View figures</div>
       </button>
+
       <button class="research-card" data-area="deepfake" aria-expanded="false" aria-controls="detail-deepfake">
         <h3>Explainable deepfake detection</h3>
-        <p>Moving from black-box real/fake labels to visual, semantic and narrative explanations.</p>
-        <div class="open-hint">View figure</div>
+        <p>Moving from black-box real/fake labels to visual, semantic and narrative explanations for forensic and non-expert users.</p>
+        <div class="open-hint">View figures</div>
       </button>
-      <button class="research-card" data-area="privacy" aria-expanded="false" aria-controls="detail-privacy">
-        <h3>Privacy-preserving forensics</h3>
-        <p>Running forensic checks on protected data without exposing the original media.</p>
-        <div class="open-hint">View figure</div>
+
+      <button class="research-card" data-area="audio" aria-expanded="false" aria-controls="detail-audio">
+        <h3>Cross-domain audio deepfake detection</h3>
+        <p>Modular, interpretable pipelines that transfer audio deepfake detection across datasets, devices and synthesis conditions.</p>
+        <div class="open-hint">View figures</div>
       </button>
-      <button class="research-card" data-area="evaluation" aria-expanded="false" aria-controls="detail-evaluation">
-        <h3>Interactive forensic evaluation</h3>
-        <p>Designing interfaces and evaluation protocols that support human reasoning and review.</p>
-        <div class="open-hint">View figure</div>
+
+      <button class="research-card" data-area="nids" aria-expanded="false" aria-controls="detail-nids">
+        <h3>Explainable network intrusion detection</h3>
+        <p>Hybrid frameworks that augment LLM prompts with cyber threat intelligence to make NIDS alerts auditable for security analysts.</p>
+        <div class="open-hint">View figures</div>
+      </button>
+
+      <button class="research-card" data-area="llmsafety" aria-expanded="false" aria-controls="detail-llmsafety">
+        <h3>LLM safety &amp; adversarial misuse</h3>
+        <p>Controlling LLM behaviour at activation level for trustworthy generation, and studying how non-experts misuse chatbots for phishing and social engineering.</p>
+        <div class="open-hint">View figures</div>
+      </button>
+
+      <button class="research-card" data-area="benchmarks" aria-expanded="false" aria-controls="detail-benchmarks">
+        <h3>Benchmarks &amp; dataset foundations</h3>
+        <p>Datasets and evaluation protocols that push detectors beyond local edits toward global scene plausibility and real-world factuality.</p>
+        <div class="open-hint">View figures</div>
       </button>
     </div>
 
-    <article class="research-detail" id="detail-media">
-      <div class="detail-grid">
-        <div class="detail-copy">
-          <h3>Multimodal misinformation &amp; media provenance</h3>
-          <p>This area studies manipulation as a communication problem, not just a pixel-level artefact problem. A persuasive fake can use a real image with a misleading caption, a generated image with a true caption, or a coordinated package of image, text and source context.</p>
-          <ul>
-            <li>Analyse image–text inconsistency and narrative-level mismatch.</li>
-            <li>Support provenance and authentication services for non-expert users.</li>
-            <li>Evaluate systems in high-stakes settings such as elections, health, conflict and public safety.</li>
-          </ul>
-        </div>
+    <!-- 1. Multimodal -->
+    <article class="research-detail" id="detail-multimodal">
+      <div class="detail-copy">
+        <h3>Multimodal manipulation &amp; misinformation detection</h3>
+        <p>Manipulation is increasingly a communication problem, not just a pixel-level artefact problem. Persuasive posts can pair a real image with a misleading caption, a generated image with a true caption, or a coordinated package of image, text and external context. Our work treats detection as a region-aware and evidence-aware reasoning task.</p>
+        <ul>
+          <li><strong>SGS (Segmentation-Guided Scoring)</strong> extends HAMMER to handle global scene inconsistencies, such as a politician giving a speech in front of an erupting volcano, by separating foreground and background regions and comparing their semantic descriptions.</li>
+          <li><strong>D-SECURE</strong> combines a content-based manipulation detector (HAMMER) with a retrieval-based fact-checker (DEFAME) so the same pipeline can catch both subtle local edits and globally fabricated claims.</li>
+        </ul>
+      </div>
+      <div class="figure-grid">
         <figure class="paper-figure">
-          <img src="images/paper-diagrams/dfp2e-fig1-problem-and-solution.png" alt="DF-P2E paper figure comparing conventional deepfake detectors with an explanation-oriented framework" loading="lazy" />
-          <figcaption class="caption">Figure from Tariq, Woo, Singh, Irmalasari, Gupta and Gupta, “From Prediction to Explanation: Multimodal, Explainable, and Interactive Deepfake Detection Framework for Non-Expert Users,” ACM Multimedia 2025.</figcaption>
+          <img src="images/paper-diagrams/sgs-fig2-pipeline.png" alt="SGS pipeline: foreground and background crops are captioned by BLIP, embedded, and compared to produce a coherence score" loading="lazy" />
+          <figcaption class="caption"><strong>SGS pipeline.</strong> Foreground and background crops are captioned independently (BLIP), embedded into a shared semantic space (MiniLM), and compared. A low similarity flags FG–BG inconsistency. Singh et al., <em>SGS: Segmentation-Guided Scoring for Global Scene Inconsistencies</em>, 2025.</figcaption>
+        </figure>
+        <figure class="paper-figure">
+          <img src="images/paper-diagrams/dsecure-fig2-pipeline.png" alt="D-SECURE rule-based scheme combining DEFAME and HAMMER outputs" loading="lazy" />
+          <figcaption class="caption"><strong>D-SECURE rule-based fusion.</strong> DEFAME provides the global factual verdict and HAMMER supplies local manipulation grounding; rule cases distinguish refuted, locally-but-globally-supported, manipulated-but-unverifiable, and NEI. Singh, Amarasinghe and Singh, <em>D-SECURE: Dual-Source Evidence Combination</em>, 2026.</figcaption>
         </figure>
       </div>
     </article>
 
+    <!-- 2. Deepfake -->
     <article class="research-detail" id="detail-deepfake">
-      <div class="detail-grid">
-        <div class="detail-copy">
-          <h3>Explainable deepfake detection</h3>
-          <p>DF-P2E reframes deepfake detection as an explanation pipeline. Instead of stopping at a confidence score, it combines a detector, Grad-CAM-style visual evidence, image-to-text captioning and LLM-based narrative refinement so users can inspect the reasons behind a verdict.</p>
-          <ul>
-            <li>Classifier output gives the initial real/fake decision and confidence.</li>
-            <li>Visual evidence highlights suspicious regions.</li>
-            <li>Captioning and narrative modules translate forensic cues into readable explanations.</li>
-          </ul>
-        </div>
+      <div class="detail-copy">
+        <h3>Explainable deepfake detection</h3>
+        <p>DF-P2E reframes deepfake detection as an explanation pipeline. Instead of stopping at a confidence score, it combines a classifier, Grad-CAM-style visual evidence, image-to-text captioning and LLM-based narrative refinement so users can inspect the reasons behind a verdict and ask follow-up questions about it.</p>
+        <ul>
+          <li>The classifier produces the initial real/fake decision and confidence.</li>
+          <li>A captioning module describes manipulated regions in forensic-aware language.</li>
+          <li>An LLM refinement layer adapts the explanation to non-expert audiences (journalists, investigators, legal users).</li>
+        </ul>
+      </div>
+      <div class="figure-grid cols-3">
         <figure class="paper-figure">
-          <img src="images/paper-diagrams/dfp2e-fig2-workflow.png" alt="DF-P2E workflow showing dataset, preprocessing, detector, XAI methods, image-to-text model and final explanation" loading="lazy" />
-          <figcaption class="caption">Figure from the DF-P2E paper showing the prediction-to-explanation workflow.</figcaption>
+          <img src="images/paper-diagrams/dfp2e-fig1-comparison.png" alt="Comparison of conventional deepfake detectors with DF-P2E" loading="lazy" />
+          <figcaption class="caption"><strong>Comparison with existing pipelines.</strong> Conventional detectors output class + confidence; DF-P2E adds Grad-CAM, image-to-text and LLM narrative refinement. Tariq et al., DF-P2E, ACM Multimedia 2025.</figcaption>
+        </figure>
+        <figure class="paper-figure">
+          <img src="images/paper-diagrams/dfp2e-fig2-workflow.png" alt="DF-P2E overall workflow" loading="lazy" />
+          <figcaption class="caption"><strong>Overall workflow.</strong> From dataset and preprocessing through detector and XAI methods to enriched and refined natural-language explanation.</figcaption>
+        </figure>
+        <figure class="paper-figure">
+          <img src="images/paper-diagrams/dfp2e-fig3-interface.png" alt="DF-P2E deployed user interface" loading="lazy" />
+          <figcaption class="caption"><strong>User interface.</strong> Upload image, detection verdict, GradCAM analysis and a chat-style explanation refinement for non-technical users.</figcaption>
         </figure>
       </div>
     </article>
 
-    <article class="research-detail" id="detail-privacy">
-      <div class="detail-grid">
-        <div class="detail-copy">
-          <h3>Privacy-preserving forensics</h3>
-          <p>Privacy-preserving media forensics asks whether forensic matching or tamper checks can be performed without handing over sensitive plaintext media. Robust homomorphic image hashing shows how secure matching can operate on encrypted images while remaining robust to benign transformations.</p>
-          <ul>
-            <li>Encrypted-domain analysis helps protect sensitive user or institutional media.</li>
-            <li>Hash-based methods can support identification of known harmful or previously identified content.</li>
-            <li>The research direction connects multimedia forensics with homomorphic encryption, secret sharing and secure cloud workflows.</li>
-          </ul>
-        </div>
+    <!-- 3. Audio -->
+    <article class="research-detail" id="detail-audio">
+      <div class="detail-copy">
+        <h3>Cross-domain audio deepfake detection</h3>
+        <p>Audio deepfake detectors trained on one dataset routinely fail on another because of differences in recording conditions, codecs and synthesis methods. We study lightweight, interpretable pipelines that adapt detectors across domains without target-domain labels.</p>
+        <ul>
+          <li>Pre-trained Wav2Vec 2.0 embeddings provide a strong self-supervised front end.</li>
+          <li>A modular sequence (power transform, ANOVA-based feature selection, joint PCA, and CORAL alignment) narrows the gap between source and target distributions.</li>
+          <li>The pipeline is transparent and ablatable, making each step's contribution easy to audit before deployment.</li>
+        </ul>
+      </div>
+      <div class="figure-grid">
         <figure class="paper-figure">
-          <img src="images/paper-diagrams/rhih-fig1-histogram-hash.png" alt="Robust Homomorphic Image Hashing figure showing a two-dimensional image histogram used for hashing" loading="lazy" />
-          <figcaption class="caption">Figure from Singh and Farid, “Robust Homomorphic Image Hashing,” CVPR Workshops 2019.</figcaption>
+          <img src="images/paper-diagrams/audio-fig1-pipeline.png" alt="Cross-domain audio deepfake detection pipeline" loading="lazy" />
+          <figcaption class="caption"><strong>Cross-domain pipeline.</strong> Wav2Vec2 embeddings → Yeo-Johnson power transform → ANOVA feature selection → Joint PCA → CORAL → logistic regression. Thani, Singh and Singh, <em>Unsupervised Domain Adaptation for Audio Deepfake Detection</em>, 2026.</figcaption>
+        </figure>
+        <figure class="paper-figure">
+          <img src="images/paper-diagrams/audio-fig2-coral.png" alt="CORAL domain alignment effect, before and after" loading="lazy" />
+          <figcaption class="caption"><strong>CORAL alignment effect.</strong> Source (ASVspoof) and target (FoR) covariance structures are matched, reducing the inter-domain gap and improving cross-domain accuracy.</figcaption>
         </figure>
       </div>
     </article>
 
-    <article class="research-detail" id="detail-evaluation">
-      <div class="detail-grid">
-        <div class="detail-copy">
-          <h3>Interactive forensic evaluation</h3>
-          <p>Useful forensic systems should localise suspicious evidence, explain model decisions, remain calibrated under distribution shift and support user interaction. The aim is to make detection outputs usable for people who need to act on them.</p>
-          <ul>
-            <li>Evaluate classifier confidence alongside explanation quality.</li>
-            <li>Measure whether visual evidence and textual explanations align.</li>
-            <li>Build interfaces that let users ask follow-up questions about a forensic verdict.</li>
-          </ul>
-        </div>
+    <!-- 4. NIDS -->
+    <article class="research-detail" id="detail-nids">
+      <div class="detail-copy">
+        <h3>Explainable network intrusion detection</h3>
+        <p>Network intrusion detection systems often deliver near-perfect benchmark numbers but offer little for the analyst on the other end of an alert. eX-NIDS adds an LLM-based explanation layer that turns flagged NetFlows into human-readable justifications, augmented with cyber threat intelligence and protocol context.</p>
+        <ul>
+          <li>The Prompt Augmenter extracts IP threat intelligence, geo-localisation, IP history and protocol IDs for each malicious flow.</li>
+          <li>This context is fused with a base prompt, then sent to an LLM (Llama 3 / GPT-4) to generate explanations.</li>
+          <li>A novel evaluation framework checks the explanations for correctness, factual consistency and feature consistency.</li>
+        </ul>
+      </div>
+      <div class="figure-grid">
         <figure class="paper-figure">
-          <img src="images/paper-diagrams/dfp2e-fig3-interface.png" alt="DF-P2E interface showing upload, detection result, Grad-CAM analysis and user-facing explanation" loading="lazy" />
-          <figcaption class="caption">Figure from the DF-P2E paper showing an interactive user-facing analysis workflow.</figcaption>
+          <img src="images/paper-diagrams/exnids-fig4-overview.png" alt="High-level overview of the eX-NIDS hybrid framework" loading="lazy" />
+          <figcaption class="caption"><strong>eX-NIDS framework.</strong> Malicious flows from the NIDS are augmented with context-specific information before being passed to an LLM, which produces explanations for the network operator. Houssel, Layeghy, Singh and Portmann, <em>eX-NIDS</em>, 2025.</figcaption>
+        </figure>
+        <figure class="paper-figure">
+          <img src="images/paper-diagrams/exnids-fig5-augmenter.png" alt="The Prompt Augmenter module structure" loading="lazy" />
+          <figcaption class="caption"><strong>Prompt Augmenter.</strong> Per-flow extractors for IP intelligence, geo-localisation, IP history, and L4/L7 protocol identification produce structured context-specific information for the LLM prompt.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- 5. LLM safety -->
+    <article class="research-detail" id="detail-llmsafety">
+      <div class="detail-copy">
+        <h3>LLM safety &amp; adversarial misuse</h3>
+        <p>Two complementary directions: controlling LLM behaviour at the activation level for trustworthy generation, and studying how non-experts can already turn off-the-shelf chatbots into phishing tools. Both inform how cyber teams should reason about LLMs as both a defence surface and an attack surface.</p>
+        <ul>
+          <li><strong>PIXEL</strong> performs adaptive, position-wise activation steering with a property-aligned subspace, providing a tuning-free way to align attributes such as truthfulness.</li>
+          <li><strong>Chatbot phishing study</strong> shows how participants without prior security or coding knowledge can prompt-engineer ChatGPT, Copilot and Gemini to produce phishing emails that consistently outperform manually-written ones.</li>
+        </ul>
+      </div>
+      <div class="figure-grid">
+        <figure class="paper-figure">
+          <img src="images/paper-diagrams/pixel-fig1-overview.png" alt="Overview of PIXEL: dual-view property-aligned subspace, adaptive intervention strength, orthogonal residual calibration" loading="lazy" />
+          <figcaption class="caption"><strong>PIXEL overview.</strong> Dual-view property-aligned subspace (tail-averaged + end-token), closed-form adaptive intervention strength, and sample-level orthogonal residual calibration. Yu, Li, Singh, Li, Wang and Hu, <em>PIXEL</em>, WWW 2026.</figcaption>
+        </figure>
+        <figure class="paper-figure">
+          <img src="images/paper-diagrams/phishing-fig1-framework.png" alt="Study framework for chatbot-assisted phishing email generation" loading="lazy" />
+          <figcaption class="caption"><strong>Chatbot-assisted phishing study.</strong> Email Creator Participants (no prior security expertise) generate phishing emails manually and via chatbots; Email Receiver Participants then rate effectiveness. Rafael, Singh and Mohanty, 2025.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- 6. Benchmarks -->
+    <article class="research-detail" id="detail-benchmarks">
+      <div class="detail-copy">
+        <h3>Benchmarks &amp; dataset foundations</h3>
+        <p>Detectors are only as honest as the benchmarks they're trained and evaluated on. We build dataset extensions and evaluation suites that expose blind spots in current state-of-the-art models, particularly global scene plausibility and end-to-end factuality, which mainstream multimodal manipulation datasets do not cover.</p>
+        <ul>
+          <li><strong>DGM4+</strong> extends the DGM⁴ benchmark with 5,000 high-quality samples introducing foreground–background mismatches and hybrids with text manipulation (FG-BG, FG-BG+TA, FG-BG+TS).</li>
+          <li><strong>ClaimReview2024+ alongside DGM⁴</strong> in D-SECURE supplies factuality labels (supported / refuted / NEI) so detection and fact-checking can be evaluated jointly.</li>
+          <li>Failure-case curation drives method design: an illustrative example (e.g., a politician in front of a volcano) motivates the entire region-aware reasoning direction.</li>
+        </ul>
+      </div>
+      <div class="figure-grid cols-3">
+        <figure class="paper-figure">
+          <img src="images/paper-diagrams/dgm4plus-fig3-distribution.png" alt="Distribution of DGM4+ extended dataset across pristine and manipulation categories" loading="lazy" />
+          <figcaption class="caption"><strong>DGM⁴+ distribution.</strong> Class types and updated dataset balance after adding FG-BG, FG-BG+TA and FG-BG+TS categories. Singh, Amarsinghe, Singh and Li, <em>DGM4+</em>, 2025.</figcaption>
+        </figure>
+        <figure class="paper-figure">
+          <img src="images/paper-diagrams/dsecure-fig1-examples.png" alt="Sample images from DGM4 and ClaimReview2024+ benchmarks" loading="lazy" />
+          <figcaption class="caption"><strong>Joint evaluation samples.</strong> DGM⁴ (pristine, FS, FA, TS, TA) and ClaimReview2024+ (supported, refuted, NEI) cover both local manipulation and global factuality. D-SECURE, 2026.</figcaption>
+        </figure>
+        <figure class="paper-figure">
+          <img src="images/paper-diagrams/sgs-fig1-failure.png" alt="Illustrative failure case: subject and caption locally aligned but globally implausible" loading="lazy" />
+          <figcaption class="caption"><strong>Motivating failure case.</strong> Subject and caption align locally, but the scene is globally implausible. This is the failure mode targeted by FG–BG reasoning. SGS, 2025.</figcaption>
         </figure>
       </div>
     </article>
 
     <div class="theme-strip" aria-label="Additional research themes">
-      <div class="theme-pill"><strong>AI safety and LLM security</strong>Prompt injection, jailbreaks, AI-enabled attacks and model misuse in cyber workflows.</div>
+      <div class="theme-pill"><strong>Privacy-preserving forensics</strong>Encrypted-domain analysis, homomorphic image hashing and secure matching for sensitive institutional media.</div>
       <div class="theme-pill"><strong>Cyber threat intelligence sharing</strong>Secure collaborative CTI workflows that reduce privacy leakage while improving incident response.</div>
-      <div class="theme-pill"><strong>Adversarial robustness</strong>Detection systems designed for adaptive manipulation and distribution shift rather than clean benchmark conditions.</div>
+      <div class="theme-pill"><strong>Knowledge distillation for LLMs</strong>Compressing and adapting massive language models for embedded, industrial and domain-specific deployment.</div>
     </div>
   </div>
 </section>
@@ -431,14 +539,14 @@
     <div class="section-head">
       <div>
         <div class="section-kicker">Publications</div>
-        <h2>Publications and technical themes.</h2>
+        <h2>Publications and technical themes</h2>
       </div>
     </div>
     <div class="pub-panel">
       <article class="card">
         <span class="tag">Research profiles</span>
-        <h3>Selected themes across the group’s work.</h3>
-        <p>The group’s public research profiles span digital forensics, multimedia forensics, encrypted-domain processing, cloud security, privacy-preserving AI and deepfake detection.</p>
+        <h3>Selected themes across the group's work</h3>
+        <p>The group's public research profiles span digital forensics, multimedia forensics, encrypted-domain processing, cloud security, privacy-preserving AI and deepfake detection.</p>
         <div class="badges">
           <span class="badge">Digital forensics</span>
           <span class="badge">Multimedia forensics</span>
@@ -446,16 +554,10 @@
           <span class="badge">Deepfake detection</span>
           <span class="badge">Privacy-preserving AI</span>
           <span class="badge">AI safety</span>
+          <span class="badge">Network intrusion detection</span>
+          <span class="badge">Knowledge distillation</span>
         </div>
         <a class="link" href="https://about.uq.edu.au/experts/41970">UQ Experts profile →</a>
-      </article>
-      <article class="source-box">
-        <h3>Paper-linked assets used on this page</h3>
-        <ul>
-          <li><a href="https://arxiv.org/abs/2508.07596">DF-P2E: From Prediction to Explanation</a> — figures for explainable deepfake detection, multimodal provenance and interactive verification.</li>
-          <li><a href="https://openaccess.thecvf.com/content_CVPRW_2019/html/Media_Forensics/Singh_Robust_Homomorphic_Image_Hashing_CVPRW_2019_paper.html">Robust Homomorphic Image Hashing</a> — figure for privacy-preserving media forensics.</li>
-          <li><a href="https://about.uq.edu.au/experts/project/72373">Authentication and Provenance of Manipulated Media</a> — UQ project page connected to media authentication and provenance.</li>
-        </ul>
       </article>
     </div>
   </div>
@@ -466,7 +568,7 @@
     <div class="section-head">
       <div>
         <div class="section-kicker">Workshops</div>
-        <h2>Workshops.</h2>
+        <h2>Workshops</h2>
       </div>
       <p class="section-intro">Selected workshops organised or co-organised across multimedia forensics, digital forensics, AI security and digital public infrastructure.</p>
     </div>
@@ -536,7 +638,7 @@
     <div class="section-head">
       <div>
         <div class="section-kicker">Gallery</div>
-        <h2>Workshops, talks and community moments.</h2>
+        <h2>Workshops, talks and community moments</h2>
       </div>
       <p class="section-intro">Selected photos from lab activities, public engagement and cyber forensics community events.</p>
     </div>
@@ -606,21 +708,62 @@
     <div class="section-head">
       <div>
         <div class="section-kicker">Team</div>
-        <h2>People and mentoring.</h2>
+        <h2>People and mentoring</h2>
       </div>
+      <p class="section-intro">Leadership and student team across multimodal misinformation, audio deepfake detection and cyber forensics.</p>
     </div>
+
     <div class="team-grid">
-      <article class="team-box">
-        <h3>Leadership</h3>
-        <p><strong>Dr Priyanka Singh</strong><br />Senior Lecturer in Cyber Security<br />School of Electrical Engineering and Computer Science<br />Affiliate, UQ Cyber Research Centre</p>
-      </article>
-      <article class="team-box" style="grid-column: span 2;">
-        <h3>Student team</h3>
-        <div class="team-list">
-          <div><strong>Gagandeep Singh</strong><br />Multimodal manipulation detection · T-IMPACT</div>
-          <div><strong>Samudi Amarasinghe</strong><br />Cyber forensics &amp; AI security</div>
-          <div><strong>Urawee Thani</strong><br />Cyber forensics &amp; AI security</div>
+      <article class="team-card">
+        <div class="team-photo"><img src="priyanka-singh.png" alt="Dr Priyanka Singh" loading="lazy" /></div>
+        <div class="team-name">Dr Priyanka Singh</div>
+        <div class="team-role">Senior Lecturer in Cyber Security · School of EECS · Affiliate, UQ Cyber Research Centre</div>
+        <div class="team-keywords">
+          <span class="badge">Multimedia forensics</span>
+          <span class="badge">Deepfake detection</span>
+          <span class="badge">Privacy-preserving AI</span>
         </div>
+        <p class="team-bio">Lab lead. Research spans cyber security, digital forensics, privacy-preserving AI, homomorphic encryption and AI-enabled content authentication, with public commentary on deepfakes, synthetic identity and online verification.</p>
+        <a class="link" href="https://about.uq.edu.au/experts/41970">UQ Experts profile →</a>
+      </article>
+
+      <article class="team-card">
+        <div class="team-photo"><img src="gagandeep-singh.jpg" alt="Gagandeep Singh" loading="lazy" /></div>
+        <div class="team-name">Gagandeep Singh</div>
+        <div class="team-role">Research student · School of EECS · T-IMPACT initiative</div>
+        <div class="team-keywords">
+          <span class="badge">Multimodal misinformation</span>
+          <span class="badge">Scene plausibility</span>
+          <span class="badge">Benchmarks</span>
+        </div>
+        <p class="team-bio">I'm a research student in the School of Electrical Engineering and Computer Science at the University of Queensland. My work focuses on multimodal misinformation detection, extending state-of-the-art detectors to handle global scene inconsistencies where a plausible-looking subject sits in a semantically impossible background. I also build benchmarks (DGM4+) and pipelines that combine content-based manipulation detection with retrieval-based fact-checking.</p>
+        <a class="link" href="https://www.linkedin.com/in/gagandeep-singh-12a91b144">LinkedIn →</a>
+      </article>
+
+      <article class="team-card">
+        <div class="team-photo"><img src="samudi.jpg" alt="Samudi Amarasinghe" loading="lazy" /></div>
+        <div class="team-name">Samudi Amarasinghe</div>
+        <div class="team-role">Master's student · School of EECS</div>
+        <div class="team-keywords">
+          <span class="badge">Misinformation</span>
+          <span class="badge">Cybersecurity</span>
+          <span class="badge">Machine learning</span>
+        </div>
+        <p class="team-bio">I am a Master's student studying computer science and cybersecurity in the School of Electrical Engineering and Computer Science at the University of Queensland. My area of interest is misinformation, with a focus on evidence combination for detection. I also strive to improve the explainability of detection, to make systems accessible to all users.</p>
+        <a class="link" href="https://www.linkedin.com/in/samudi-amarasinghe-395285322">LinkedIn →</a>
+      </article>
+
+      <article class="team-card">
+        <div class="team-photo"><img src="urawee.jpg" alt="Urawee Thani" loading="lazy" /></div>
+        <div class="team-name">Urawee Thani</div>
+        <div class="team-role">Software Engineering thesis student · School of EECS</div>
+        <div class="team-keywords">
+          <span class="badge">Machine learning</span>
+          <span class="badge">Audio deepfake detection</span>
+          <span class="badge">Cross-domain generalisation</span>
+        </div>
+        <p class="team-bio">I'm a software engineering student currently undertaking a thesis in machine learning, speech processing, and audio deepfake detection. My recent work focuses on cross-domain generalisation and improving the robustness of AI models across diverse datasets and real-world conditions.</p>
+        <a class="link" href="https://www.linkedin.com/in/uraweeThani">LinkedIn →</a>
       </article>
     </div>
   </div>
@@ -631,7 +774,7 @@
     <div class="section-head">
       <div>
         <div class="section-kicker">Contact</div>
-        <h2>Contact and collaboration.</h2>
+        <h2>Contact and collaboration</h2>
       </div>
     </div>
     <div class="contact-grid">
@@ -689,13 +832,13 @@
 
     buttons.forEach(btn => btn.addEventListener('click', () => selectArea(btn.dataset.area)));
 
-    const profileImg = document.querySelector('.profile-photo img');
-    if (profileImg) {
-      profileImg.addEventListener('error', () => {
-        const wrap = profileImg.closest('.profile-photo');
+    // Hide any profile/team photo that fails to load, keeping the layout clean before images are added
+    document.querySelectorAll('.profile-photo img, .team-photo img').forEach(img => {
+      img.addEventListener('error', () => {
+        const wrap = img.closest('.profile-photo, .team-photo');
         if (wrap) wrap.style.display = 'none';
       });
-    }
+    });
 
     const gallerySection = document.querySelector('[data-gallery-section]');
     const galleryNav = document.getElementById('galleryNav');
@@ -705,80 +848,42 @@
     const lbCaption = document.getElementById('lightboxCaption');
     const lbClose = document.getElementById('lightboxClose');
 
-    const galleryFolders = [
-      'images/gallery/',
-      './images/gallery/',
-      'gallery/',
-      './gallery/'
-    ];
-
-    const galleryExtensions = [
-      '.jpg',
-      '.JPG',
-      '.jpeg',
-      '.JPEG',
-      '.png',
-      '.PNG',
-      '.webp',
-      '.WEBP'
-    ];
+    const galleryFolders = ['images/gallery/', './images/gallery/', 'gallery/', './gallery/'];
+    const galleryExtensions = ['.jpg', '.JPG', '.jpeg', '.JPEG', '.png', '.PNG', '.webp', '.WEBP'];
 
     function buildGalleryCandidates(item, img) {
       const baseName = item.dataset.galleryImage;
       const originalSrc = img.getAttribute('src');
-
       const candidates = [];
       if (originalSrc) candidates.push(originalSrc);
-
       if (baseName) {
         galleryFolders.forEach(folder => {
-          galleryExtensions.forEach(ext => {
-            candidates.push(folder + baseName + ext);
-          });
+          galleryExtensions.forEach(ext => candidates.push(folder + baseName + ext));
         });
       }
-
       return Array.from(new Set(candidates));
     }
 
     function tryGalleryImage(item) {
       const img = item.querySelector('img');
-      if (!img) {
-        item.classList.add('is-missing');
-        return Promise.resolve(false);
-      }
-
+      if (!img) { item.classList.add('is-missing'); return Promise.resolve(false); }
       const candidates = buildGalleryCandidates(item, img);
       let index = 0;
-
       return new Promise(resolve => {
         function tryNext() {
-          if (index >= candidates.length) {
-            item.classList.add('is-missing');
-            resolve(false);
-            return;
-          }
-
+          if (index >= candidates.length) { item.classList.add('is-missing'); resolve(false); return; }
           const candidate = candidates[index++];
           const tester = new Image();
-
-          tester.onload = function () {
-            img.src = candidate;
-            item.classList.remove('is-missing');
-            resolve(true);
-          };
-
+          tester.onload = () => { img.src = candidate; item.classList.remove('is-missing'); resolve(true); };
           tester.onerror = tryNext;
           tester.src = candidate;
         }
-
         tryNext();
       });
     }
 
     Promise.all(galleryItems.map(item => tryGalleryImage(item))).then(results => {
       const visibleCount = results.filter(Boolean).length;
-
       if (visibleCount === 0) {
         if (gallerySection) gallerySection.remove();
         if (galleryNav) galleryNav.remove();
@@ -796,10 +901,8 @@
     galleryItems.forEach(item => {
       item.addEventListener('click', () => {
         if (item.classList.contains('is-missing')) return;
-
         const img = item.querySelector('img');
         if (!img || !img.src) return;
-
         lbImg.src = img.src;
         lbImg.alt = img.alt;
         lbCaption.textContent = item.dataset.caption || '';
@@ -812,13 +915,9 @@
     if (lbClose) lbClose.addEventListener('click', closeLightbox);
 
     const lightboxInner = lb ? lb.querySelector('div') : null;
-    if (lightboxInner) {
-      lightboxInner.addEventListener('click', event => event.stopPropagation());
-    }
+    if (lightboxInner) lightboxInner.addEventListener('click', event => event.stopPropagation());
 
-    document.addEventListener('keydown', event => {
-      if (event.key === 'Escape') closeLightbox();
-    });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape') closeLightbox(); });
   })();
 </script>
 </body>
