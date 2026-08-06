@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -110,6 +109,18 @@
   h2 { color: var(--ink); font-size: clamp(26px, 3.4vw, 36px); line-height: 1.15; letter-spacing: -0.025em; font-weight: 800; }
   .section-kicker { color: var(--uq-purple); font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; font-size: 11px; margin-bottom: 8px; }
   .section-intro { max-width: 580px; color: var(--muted); font-size: 15px; }
+
+  /* ---------- Latest ---------- */
+  #latest { background: linear-gradient(180deg, var(--tint), #ffffff 76%); }
+  .latest-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 44px; align-items: center; }
+  .latest-copy p { color: var(--body); font-size: 15px; margin-top: 14px; }
+  .latest-copy .btn { margin-top: 24px; }
+  .latest-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .latest-photo { margin: 0; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); transition: transform .2s ease, box-shadow .2s ease; }
+  .latest-photo:hover { transform: translateY(-3px); box-shadow: var(--shadow-strong); }
+  .latest-photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; cursor: zoom-in; transition: transform .42s ease; }
+  .latest-photo:hover img { transform: scale(1.04); }
+  .latest-photo figcaption { padding: 11px 14px 14px; color: var(--muted); font-size: 12px; line-height: 1.5; border-top: 1px solid var(--line); }
 
   /* ---------- About ---------- */
   .about-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) 320px; gap: 44px; align-items: start; }
@@ -231,7 +242,8 @@
   }
   @media (max-width: 920px) {
     nav { align-items: flex-start; flex-direction: column; gap: 10px; }
-    .about-grid, .pub-panel { grid-template-columns: 1fr; }
+    .about-grid, .pub-panel, .latest-grid { grid-template-columns: 1fr; }
+    .latest-grid { gap: 32px; }
     .news-grid, .cards-grid, .team-grid, .contact-grid, .theme-strip { grid-template-columns: 1fr 1fr; }
     .figure-grid, .figure-grid.cols-3 { grid-template-columns: 1fr; }
   }
@@ -239,6 +251,7 @@
     .hero .container { padding-top: 64px; padding-bottom: 56px; }
     section { padding: 56px 0; }
     .news-grid, .cards-grid, .research-grid, .gallery-grid, .team-grid, .contact-grid, .theme-strip { grid-template-columns: 1fr; }
+    .latest-photos { grid-template-columns: 1fr; }
     .about-card, .research-detail { padding: 22px; }
   }
 </style>
@@ -253,6 +266,7 @@
         <span>AI-enabled Cyber Forensics Lab</span>
       </a>
       <ul class="nav-links">
+        <li><a href="#latest">Latest</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#news">News</a></li>
         <li><a href="#research">Research</a></li>
@@ -275,6 +289,36 @@
     <div class="hero-actions">
       <a class="btn btn-primary" href="#research">Explore research</a>
       <a class="btn btn-secondary" href="#contact">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<section id="latest">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-kicker">Latest</div>
+        <h2>Governing for Trust: DPI forum concludes at UQ Brisbane City</h2>
+      </div>
+      <p class="section-intro">The culminating expert feedback forum for the DFAT-funded Australia–India digital public infrastructure project.</p>
+    </div>
+    <div class="latest-grid">
+      <div class="latest-copy">
+        <span class="tag">30 July 2026</span>
+        <p>The lab closed out its AICCTP digital public infrastructure project with <strong>Governing for Trust</strong>, a full-day forum held at UQ Brisbane City in partnership with ICRIER. The event brought policymakers, clinicians, technologists and researchers into one room to stress-test the draft India and Australia comparative report before final publication.</p>
+        <p>Four keynote addresses opened the day, followed by presentation of the draft report and a ninety-minute structured panel working through accessibility and inclusivity, efficiency, and security, privacy and trust. Lightning talks closed the programme. Feedback gathered on the day is now being incorporated into the final report.</p>
+        <a class="btn btn-primary" href="https://impact-initiative.github.io/aicctp-dpi/">Conference site →</a>
+      </div>
+      <div class="latest-photos">
+        <figure class="latest-photo">
+          <img src="images/IMG_6233.jpg" alt="Governing for Trust digital public infrastructure forum at UQ Brisbane City, 30 July 2026" loading="lazy" />
+          <figcaption>Governing for Trust forum · UQ Brisbane City · 30 July 2026</figcaption>
+        </figure>
+        <figure class="latest-photo">
+          <img src="images/IMG_6234.jpg" alt="Speakers and participants at the Governing for Trust forum, 30 July 2026" loading="lazy" />
+          <figcaption>Speakers and participants · Governing for Trust · 30 July 2026</figcaption>
+        </figure>
+      </div>
     </div>
   </div>
 </section>
@@ -312,6 +356,13 @@
       <p class="section-intro">Recent public commentary, cyber security engagement and lab updates.</p>
     </div>
     <div class="news-grid">
+      <article class="card">
+        <span class="tag">UQ–ICRIER · AICCTP</span>
+        <h3>Governing for Trust: DPI expert feedback forum held at UQ Brisbane City</h3>
+        <p>The culminating forum for the DFAT-funded AICCTP project convened experts across government, healthcare, industry and academia to review the draft India and Australia comparative report on inclusive, efficient and secure digital public infrastructure.</p>
+        <p class="meta">UQ Cyber with ICRIER · 30 July 2026</p>
+        <a class="link" href="https://impact-initiative.github.io/aicctp-dpi/">Conference site →</a>
+      </article>
       <article class="card">
         <span class="tag">ICC 2026</span>
         <h3>UQ Cyber and AUSCERT to host the International Cybersecurity Challenge</h3>
@@ -632,6 +683,14 @@
 
       <article class="card">
         <span class="tag">UQ–ICRIER · AICCTP</span>
+        <h3>Governing for Trust: Inclusive, Efficient, and Secure Digital Public Infrastructure</h3>
+        <p>The culminating expert feedback forum for the AICCTP project, hosted by UQ Cyber with ICRIER. Keynote addresses, presentation of the draft India and Australia comparative report, and a structured panel across inclusion, efficiency, and security, privacy and trust.</p>
+        <p class="meta">UQ Brisbane City · Brisbane · 30 July 2026</p>
+        <a class="link" href="https://impact-initiative.github.io/aicctp-dpi/">Conference site →</a>
+      </article>
+
+      <article class="card">
+        <span class="tag">UQ–ICRIER · AICCTP</span>
         <h3>Digital Public Infrastructure and Public Service Delivery: Inclusion, Efficiency, and Security</h3>
         <p>A UQ–Indian Council for Research on International Economic Relations collaboration under the Australia–India Cyber and Critical Technology Partnership, funded by DFAT, focused on DPI-enabled public service delivery.</p>
         <p class="meta">ICRIER · New Delhi · 8 May 2026</p>
@@ -857,7 +916,7 @@
     });
 
     const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
-    const paperFigures = Array.from(document.querySelectorAll('.paper-figure'));
+    const paperFigures = Array.from(document.querySelectorAll('.paper-figure, .latest-photo'));
     const lb = document.getElementById('lightbox');
     const lbImg = document.getElementById('lightboxImg');
     const lbCaption = document.getElementById('lightboxCaption');
