@@ -78,18 +78,18 @@
   .nav-links a:hover { color: var(--ink); border-bottom-color: var(--ink); text-decoration: none; }
 
   /* ---------- Cover / identity ---------- */
-  /* Banner lives at images/uq-campus.jpg (4:1 aerial crop of the St Lucia campus).
+  /* Banner lives at images/uq-campus.jpg (16:9 photo of the Great Court, St Lucia).
      The purple gradient sits underneath as a fallback, so a missing or misnamed
      file degrades to the old band rather than a broken image. */
   .cover-band {
-    height: 210px;
+    height: 300px;
     background-color: #2f1447;
     background-image:
       linear-gradient(180deg, rgba(26,10,40,0.10) 0%, rgba(26,10,40,0) 30%, rgba(26,10,40,0.22) 100%),
       url("images/uq-campus.jpg"),
       linear-gradient(115deg, #3d1a5c 0%, var(--uq-purple) 46%, var(--uq-purple-soft) 100%);
     background-size: cover, cover, cover;
-    background-position: center, center 78%, center;
+    background-position: center, center 80%, center;
     background-repeat: no-repeat;
     position: relative; overflow: hidden;
   }
@@ -109,6 +109,28 @@
   .btn-secondary:hover { background: var(--uq-tint); }
   .btn-ghost { color: var(--body); border-color: var(--line-strong); background: #fff; }
   .btn-ghost:hover { border-color: var(--ink); color: var(--ink); }
+
+  /* ---------- Upcoming events ---------- */
+  .upcoming-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .event-card { padding: 22px; display: flex; flex-direction: column; transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+  .event-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); border-color: var(--line-strong); }
+  .event-head { display: flex; gap: 14px; align-items: flex-start; }
+  .event-date {
+    flex: none; width: 62px; border-radius: var(--radius-sm); overflow: hidden;
+    border: 1px solid var(--line); text-align: center; background: var(--uq-tint);
+  }
+  .event-date b { display: block; background: var(--uq-purple); color: #fff; font-size: 10.5px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 0; }
+  .event-date span { display: block; color: var(--uq-purple); font-size: 17px; font-weight: 800; letter-spacing: -0.02em; padding: 6px 0 7px; line-height: 1.1; }
+  .event-card h3 { color: var(--ink); font-size: 17px; line-height: 1.3; font-weight: 800; }
+  .event-card .event-sub { color: var(--uq-purple); font-size: 13px; font-weight: 700; margin-top: 3px; }
+  .event-card > p { color: var(--body); font-size: 14px; margin-top: 13px; }
+  .event-card .meta { color: var(--muted); font-weight: 600; font-size: 12.5px; margin-top: 10px; }
+  .deadline-flag {
+    margin-top: 13px; padding: 10px 13px; border-radius: var(--radius-sm);
+    background: #fdf6e6; border: 1px solid #ecd9ab; color: #7a5410; font-size: 13px; font-weight: 600;
+  }
+  .deadline-flag b { color: #5c3e0a; font-weight: 800; }
+  .event-card .links { margin-top: auto; padding-top: 15px; display: flex; flex-wrap: wrap; gap: 14px; }
 
   /* ---------- Sections ---------- */
   section { padding: 34px 0; scroll-margin-top: 76px; }
@@ -344,14 +366,15 @@
     .nav-links { justify-content: flex-start; }
     .nav-links a { padding: 6px 10px 8px; }
     .about-grid, .cards-grid, .team-grid, .contact-grid, .theme-strip { grid-template-columns: 1fr 1fr; }
+    .upcoming-grid { grid-template-columns: 1fr; }
     .figure-grid, .figure-grid.cols-3 { grid-template-columns: 1fr; }
     .about-grid { grid-template-columns: 1fr; }
   }
   @media (max-width: 640px) {
-    .cover-band { height: 130px; }
+    .cover-band { height: 165px; }
     .identity { margin-top: -44px; }
     .identity-card { padding: 20px 18px 18px; }
-    .cards-grid, .research-grid, .gallery-grid, .team-grid, .contact-grid, .theme-strip { grid-template-columns: 1fr; }
+    .cards-grid, .research-grid, .gallery-grid, .team-grid, .contact-grid, .theme-strip, .upcoming-grid { grid-template-columns: 1fr; }
     .post-media.grid-2 { grid-template-columns: 1fr; }
     .pub-item { grid-template-columns: 1fr; gap: 12px; }
     .research-detail, .about-card, .featured-body { padding: 20px; }
@@ -371,6 +394,7 @@
       </a>
       <ul class="nav-links">
         <li><a href="#newsroom">Newsroom</a></li>
+        <li><a href="#upcoming">Upcoming</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#research">Research</a></li>
         <li><a href="#publications">Publications</a></li>
@@ -436,6 +460,55 @@
 </section>
 
 <!-- ============================= FEED ============================= -->
+<!-- ===== UPCOMING EVENTS ===== -->
+<section id="upcoming" style="padding-top:20px;padding-bottom:6px;">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-kicker">Upcoming</div>
+        <h2>Events we're running</h2>
+      </div>
+      <p class="section-intro">Two events organised by the lab are coming up. Submissions are still open for one of them.</p>
+    </div>
+
+    <div class="upcoming-grid">
+      <article class="panel event-card">
+        <div class="event-head">
+          <div class="event-date"><b>Nov</b><span>10&ndash;14</span></div>
+          <div>
+            <h3>IMPACT 2026</h3>
+            <div class="event-sub">Workshop at ACM Multimedia 2026</div>
+          </div>
+        </div>
+        <p><strong>Impact-aware Multimodal Persuasive Analysis and Contextual Trust.</strong> A workshop on multimedia-native, persuasion-optimised misinformation, bringing together multimedia forensics, multimodal reasoning, provenance, trust, robustness and human-centred verification. The programme also includes the T-IMPACT Challenge.</p>
+        <p class="meta">Rio de Janeiro, Brazil &middot; 10&ndash;14 November 2026 &middot; Submissions closed &mdash; programme now confirmed</p>
+        <div class="links">
+          <a class="link" href="https://impact-initiative.github.io/" target="_blank" rel="noopener">Workshop website &rarr;</a>
+          <a class="link" href="#publications">Accepted papers &rarr;</a>
+        </div>
+      </article>
+
+      <article class="panel event-card">
+        <div class="event-head">
+          <div class="event-date"><b>Nov</b><span>19&ndash;20</span></div>
+          <div>
+            <h3>SDLT 2026</h3>
+            <div class="event-sub">10th Symposium on Distributed Ledger Technology</div>
+          </div>
+        </div>
+        <p>A forum for researchers, business leaders and policymakers working on distributed ledger technology &mdash; consensus and scalability, smart contracts, blockchain forensics and threat intelligence, decentralised identity, and post-quantum ledgers. Dr Priyanka Singh is a General Chair; accepted papers appear in Springer's CCIS series.</p>
+        <p class="meta">Building 42, UQ St Lucia &middot; Brisbane, Australia &middot; 19&ndash;20 November 2026</p>
+        <div class="deadline-flag"><b>Call for papers open.</b> Paper submissions close 15 September 2026; notification 15 October. Early-bird registration until 10 October.</div>
+        <div class="links">
+          <a class="link" href="https://symposium-dlt.org/10th/" target="_blank" rel="noopener">Symposium website &rarr;</a>
+          <a class="link" href="https://meteor.springer.com/SDLT2026" target="_blank" rel="noopener">Submit a paper &rarr;</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEED ===== -->
 <section id="feed" style="padding-top:20px;">
   <div class="container">
     <div class="section-head">
@@ -496,8 +569,13 @@
               <p>The session brought cyber security research directly to clinicians, covering phishing and social engineering against medical practices, the security of patient data and connected clinical devices, and how AI-generated content is changing the threat landscape for healthcare providers.</p>
             </div>
 
+            <figure class="post-media" data-optional-media>
+              <img src="images/apvrstalk.jpg" alt="Dr Priyanka Singh with speakers and delegates at the 19th Asia-Pacific Vitreo-retina Society Congress, Gold Coast" loading="lazy" />
+              <figcaption>Dr Priyanka Singh (second from right) at the 19th Asia-Pacific Vitreo-retina Society Congress &middot; Gold Coast &middot; August 2026</figcaption>
+            </figure>
+
             <div class="post-actions">
-              <a href="https://2026.apvrs.org/" target="_blank" rel="noopener">Congress website &rarr;</a>
+              <a href="https://2026.apvrs.org/program-schedule/?code=1054" target="_blank" rel="noopener">Session in the programme &rarr;</a>
               <a href="#detail-llmsafety" data-open-area="llmsafety">Our phishing &amp; LLM misuse research &rarr;</a>
             </div>
           </article>
@@ -703,6 +781,15 @@
 
       <!-- ===== RIGHT RAIL ===== -->
       <aside class="rail" aria-label="Lab summary and quick links">
+        <div class="panel rail-card">
+          <h3>Upcoming events</h3>
+          <ul class="rail-links">
+            <li><a href="https://impact-initiative.github.io/" target="_blank" rel="noopener">IMPACT 2026 @ ACM MM &middot; 10&ndash;14 Nov &middot; Rio de Janeiro</a></li>
+            <li><a href="https://symposium-dlt.org/10th/" target="_blank" rel="noopener">SDLT 2026 &middot; 19&ndash;20 Nov &middot; UQ St Lucia</a></li>
+            <li><a href="https://meteor.springer.com/SDLT2026" target="_blank" rel="noopener">SDLT 2026 call for papers &middot; closes 15 Sep</a></li>
+          </ul>
+        </div>
+
         <div class="panel rail-profile">
           <div class="avatar"><img src="priyanka-singh.png" alt="Dr Priyanka Singh" loading="lazy" /></div>
           <strong>Dr Priyanka Singh</strong>
@@ -1173,11 +1260,22 @@
       </article>
 
       <article class="panel card">
+        <span class="tag">SDLT 2026</span>
+        <h3>10th Symposium on Distributed Ledger Technology</h3>
+        <p>A forum for researchers, industry and policymakers across consensus and scalability, smart contracts, blockchain forensics and threat intelligence, decentralised identity, and post-quantum ledgers. Dr Priyanka Singh is a General Chair; proceedings appear in Springer's CCIS series.</p>
+        <p class="meta">UQ St Lucia &middot; Brisbane, Australia &middot; 19&ndash;20 November 2026</p>
+        <div class="links">
+          <a class="link" href="https://symposium-dlt.org/10th/" target="_blank" rel="noopener">Symposium website &rarr;</a>
+          <a class="link" href="https://meteor.springer.com/SDLT2026" target="_blank" rel="noopener">Call for papers &rarr;</a>
+        </div>
+      </article>
+
+      <article class="panel card">
         <span class="tag">APVRS 2026</span>
         <h3>Australian Society of Ophthalmologists Cybersecurity Panel &mdash; Let&rsquo;s Go Phishing!</h3>
         <p>Invited keynote in the cybersecurity panel at <strong>&lsquo;Where Retina Meets the Reef&rsquo;</strong>, the 19th Annual Asia-Pacific Vitreo-retina Society Congress, bringing phishing, social engineering and AI-enabled fraud research to a clinical ophthalmology audience.</p>
         <p class="meta">APVRS Congress &middot; Gold Coast, Australia &middot; 28&ndash;30 August 2026</p>
-        <div class="links"><a class="link" href="https://2026.apvrs.org/" target="_blank" rel="noopener">Congress website &rarr;</a></div>
+        <div class="links"><a class="link" href="https://2026.apvrs.org/program-schedule/?code=1054" target="_blank" rel="noopener">Session in the programme &rarr;</a></div>
       </article>
 
       <article class="panel card">
@@ -1243,6 +1341,13 @@
     </div>
 
     <div class="gallery-grid">
+      <article class="gallery-item" data-optional-media data-gallery-image="apvrstalk" data-caption="Dr Priyanka Singh (second from right) at the 19th Asia-Pacific Vitreo-retina Society Congress, Gold Coast, August 2026.">
+        <div class="gallery-thumb">
+          <img src="images/apvrstalk.jpg" alt="Dr Priyanka Singh with speakers and delegates at the 19th APVRS Congress, Gold Coast" loading="lazy" />
+        </div>
+        <div class="gallery-caption">APVRS 2026 &middot; Gold Coast</div>
+      </article>
+
       <article class="gallery-item" data-optional-media data-gallery-image="IMG_6183" data-caption="Structured Feedback Discussion panel at the Governing for Trust forum, UQ Brisbane City, 30 July 2026.">
         <div class="gallery-thumb">
           <img src="images/IMG_6183.jpg" alt="Structured feedback discussion panel at the Governing for Trust forum" loading="lazy" />
